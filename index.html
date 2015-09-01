@@ -3,15 +3,81 @@
 <head>
 	<title>Store</title>
 	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="Style/normalize.css">
-	<link rel="stylesheet" type="text/css" href="Style/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
 
- 	<script src="Scripts/app.js"></script>
+ 	<script src="app/app.js"></script>
 </head>
 <body>
 
+<header>
+	<nav>
+		<div>Home</div>
+		<div>Shop</div>
+		<div>About</div>
+		<div>Contact</div>
+	</nav>
+</header>
+
+<div class="shop" ng-app="myApp" ng-controller="customersCtrl">
+	<div class="gallery">
+		<div class="item" ng-repeat="product in products">
+			<img ng-src="{{product.picture}}">
+			<ul class="item_info">
+				<li>{{product.name}}</li>
+				<li>{{product.price}}</li>
+				<li><button>Add to cart</button></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="side-content">
+		<div class="filter">
+			<h4>Filter</h4>
+			<label>Category</label>
+			<select name="Categories">
+				<option value="">Adventure</option>
+				<option value="">Sport</option>
+				<option value="">Arcade</option>
+				<option value="">Shooter</option>
+			</select> <br>
+			<label>Price range</label>
+			<div class="price">
+				<div class="price_base">
+					<div class="price_min">
+						
+					</div>
+					<div class="price_max">
+						
+					</div>					
+				</div>				
+			</div>
+		</div>
+		<div class="cart">
+		Lorem
+		<button ng-click="playSound()">CHA-CHING</button>
+		</div>
+	</div>
+</div>
+
+<footer>
+	<div>Copiright @ 2015</div>
+</footer>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("http://www.json-generator.com/api/json/get/cuZnnOChIO?indent=2")
+    .success(function(response) {$scope.products = response});
+    $scope.playSound = function(){
+    	$scope.audio.play();
+    }
+    $scope.audio = new Audio('assets/sounds/Ka-Ching.wav');
+    
+});
+</script>
 </body>
 </html>
