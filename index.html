@@ -32,6 +32,9 @@
 				<li><button>Add to cart</button></li>
 			</ul>
 		</div>
+		<div id="loader">
+			<img src="assets/gifs/loader.gif">
+		</div>
 	</div>
 
 	<div class="side-content">
@@ -47,10 +50,10 @@
 			<label>Price range</label>
 			<div class="price">
 				<div class="price_base">
-					<div class="price_min">
+					<div class="price_min" draggable="true">
 						
 					</div>
-					<div class="price_max">
+					<div class="price_max" draggable="true">
 						
 					</div>					
 				</div>				
@@ -70,7 +73,7 @@
 <script>
 var app = angular.module('myApp', []);
 app.controller('customersCtrl', function($scope, $http) {
-    $http.get("http://www.json-generator.com/api/json/get/cuZnnOChIO?indent=2")
+    $http.get("http://www.json-generator.com/api/json/get/cvlWRImsya?indent=2")
     .success(function(response) {$scope.products = response});
     $scope.playSound = function(){
     	$scope.audio.play();
