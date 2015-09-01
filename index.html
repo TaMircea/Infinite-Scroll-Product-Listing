@@ -24,7 +24,7 @@
 
 <div class="shop" ng-app="myApp" ng-controller="customersCtrl">
 	<div class="gallery">
-		<div class="item" ng-repeat="product in products">
+		<div class="item" ng-repeat="product in products | productFilter: currentCategory" >
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
 				<li>{{product.name}}</li>
@@ -41,11 +41,8 @@
 		<div class="filter">
 			<h4>Filter</h4>
 			<label>Category</label>
-			<select name="Categories">
-				<option value="">Adventure</option>
-				<option value="">Sport</option>
-				<option value="">Arcade</option>
-				<option value="">Shooter</option>
+			<select name="Categories" ng-model="category" ng-change="change(category)" ng-options="category for category in categories">
+				
 			</select> <br>
 			<label>Price range</label>
 			<div class="price">
@@ -72,14 +69,55 @@
 
 <script>
 var app = angular.module('myApp', []);
+
+app.filter('productFilter', function(){
+    return function(products, category) {
+        var filteredProducts = [];
+        var products = products;
+        var category = category;
+        angular.forEach(products, function(product) {
+            if(product.categoriesRaw.indexOf(category) != -1){
+                filteredProducts.push(product);
+            }
+            if(category == "All"){
+                filteredProducts.push(product);
+            }
+        });
+        return filteredProducts;
+    }
+});
+
 app.controller('customersCtrl', function($scope, $http) {
-    $http.get("http://www.json-generator.com/api/json/get/cvlWRImsya?indent=2")
-    .success(function(response) {$scope.products = response});
+    $http.get("http://www.json-generator.com/api/json/get/bVFLFKuYHS?indent=2")
+    .success(function(response) {
+    	$scope.products = response;
+    	$scope.catFilter();
+    });
     $scope.playSound = function(){
     	$scope.audio.play();
     }
     $scope.audio = new Audio('assets/sounds/Ka-Ching.wav');
-    
+    $scope.categories = [];
+    $scope.categories.push("All");
+    $scope.currentCategory = "All";
+    $scope.change = function(option){
+        
+        $scope.currentCategory=option;
+        console.log($scope.currentCategory);
+    };
+
+    $scope.catFilter=function(){
+	    	angular.forEach($scope.products, function(product){
+	        var cat = product.categoriesRaw;
+	        angular.forEach(cat, function(val){
+	            if($scope.categories.indexOf(val) == -1) {
+	                $scope.categories.push(val);
+	                $scope.currentCategory=val;
+	            }
+	        });
+	    });
+    }
+
 });
 </script>
 </body>
