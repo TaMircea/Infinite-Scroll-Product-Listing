@@ -30,14 +30,26 @@ footer div{
 	max-width: 20%;
 }
 .filter{
+	padding: 1%;
 	position: fixed;
 	right: 1%;
 	top: 10%;
+	border-radius: 5px;
+	border:1px solid black;
 }
 .cart{
+	padding: 1%;
 	position: fixed;
 	right: 1%;
 	top: 50%;
+	border-radius: 5px;
+	border:1px solid black;
+}
+.productList{
+
+}
+.productList td {
+	padding: 4% 10%;
 }
 .item{
 	display: inline-block;

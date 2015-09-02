@@ -28,8 +28,8 @@
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
 				<li>{{product.name}}</li>
-				<li>{{product.price}}</li>
-				<li><button>Add to cart</button></li>
+				<li>{{product.price | currency:"$"}}</li>
+				<li><button ng-click="addProduct(product)">Add to cart</button></li>
 			</ul>
 		</div>
 		<div id="loader">
@@ -57,9 +57,22 @@
 			</div>
 		</div>
 		<div class="cart">
-		Lorem
-		<button ng-click="playSound()">CHA-CHING</button>
+			<h4>Cart</h4>
+			<table class="productList">
+			  <tr ng-repeat="cartProduct in cartProducts">
+			    <td>{{ cartProduct.name }}</td>
+			    <td>{{ cartProduct.qInCart }}</td>
+			    <td><button ng-click="removeProduct(cartProduct)">-</button></td>
+			  </tr>
+			</table>
+		<button ng-click="buyCart()">CHA-CHING</button>
 		</div>
+	</div>
+	<div ng-repeat="item in invoiceItems">
+		<span>{{ item.name }}</span>
+		<span>{{ item.qInCart }}</span>
+		<span>{{ item.price | currency:"$" }}</span>
+		<span>{{ (item.qInCart * item.price) | currency:"$" }}</span>	
 	</div>
 </div>
 
@@ -88,7 +101,7 @@ app.filter('productFilter', function(){
 });
 
 app.controller('customersCtrl', function($scope, $http) {
-    $http.get("http://www.json-generator.com/api/json/get/bVFLFKuYHS?indent=2")
+    $http.get("http://www.json-generator.com/api/json/get/cqHeVHQjKG?indent=2")
     .success(function(response) {
     	$scope.products = response;
     	$scope.catFilter();
@@ -100,6 +113,7 @@ app.controller('customersCtrl', function($scope, $http) {
     $scope.categories = [];
     $scope.categories.push("All");
     $scope.currentCategory = "All";
+
     $scope.change = function(option){
         
         $scope.currentCategory=option;
@@ -116,6 +130,36 @@ app.controller('customersCtrl', function($scope, $http) {
 	            }
 	        });
 	    });
+    }
+
+    $scope.cartProducts = [];
+    $scope.addProduct = function(prod){
+    	$scope.addPro = this;
+    	$scope.prod=prod;
+    	if($scope.cartProducts.indexOf($scope.prod) == -1){
+    			$scope.prod.qInCart = 1;
+                $scope.cartProducts.push($scope.prod);
+            }
+         else{
+         	$scope.prod.qInCart ++;
+         }
+
+    }
+    $scope.removeProduct = function(prod){
+    	if(prod.qInCart>1){
+    		prod.qInCart--;
+    	}
+    	else{
+    		var index = $scope.cartProducts.indexOf(prod);
+    		$scope.cartProducts.splice(index, 1);
+    	}
+    }
+
+    $scope.invoiceItems = [];
+    $scope.buyCart = function(){
+    	$scope.invoiceItems = $scope.cartProducts;
+    	$scope.cartProducts=[];
+    	$scope.playSound();
     }
 
 });
