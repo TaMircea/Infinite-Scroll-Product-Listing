@@ -5,8 +5,8 @@
 	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
 
  	<script src="app/app.js"></script>
@@ -24,7 +24,7 @@
 
 <div class="shop" ng-app="myApp" ng-controller="customersCtrl">
 	<div class="gallery" when-scrolled="LoadMoreData()">
-		<div class="item" ng-repeat="product in displayedProducts | productFilter: currentCategory" >
+		<div class="item" ng-repeat="product in displayedProducts | productFilter: {category: currentCategory, min: filterMinPrice}" >
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
 				<li>{{product.name}}</li>
@@ -47,6 +47,7 @@
 			<select name="Categories" ng-model="category" ng-change="change(category)" ng-options="category for category in categories">
 				
 			</select> <br>
+			<input type="range" min="0" max="100" step="1" ng-model="filterMinPrice"/>
 			<div class="price">
 				<div class="price_base">
 					<div class="price_min" draggable="true">
@@ -77,126 +78,9 @@
 		<span>{{ (item.qInCart * item.price) | currency:"$" }}</span>	
 	</div>
 </div>
-
 <footer>
 	<div>Copyright @ 2015</div>
 </footer>
 
-<script>
-var app = angular.module('myApp', []);
-
-app.directive('whenScrolled', function() {
-    return function(scope, elm, attr) {
-        var raw = elm[0];
-        elm.bind('scroll', function() {
-            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
-                scope.$apply(attr.whenScrolled);
-            }
-        });
-    };
-});
-
-app.filter('productFilter', function(){
-    return function(products, category) {
-        var filteredProducts = [];
-        var products = products;
-        var category = category;
-        var price_min = 0;
-    	var price_max = 100;
-
-        angular.forEach(products, function(product) {
-        	if(product.price >= price_min && product.price<=price_max){
-
-	            if(product.categoriesRaw.indexOf(category) != -1){
-	                filteredProducts.push(product);
-	            }
-	            if(category == "All"){
-	                filteredProducts.push(product);
-	            }
-	        }
-        });
-        return filteredProducts;
-    }
-});
-
-app.controller('customersCtrl', function($scope, $http) {
-	$scope.products;
-	$scope.displayedProducts;
-    $http.get("http://www.json-generator.com/api/json/get/crUhBLYYPm?indent=2")
-    .success(function(response) {
-    	$scope.products = response;
-    	$scope.displayedProducts = $scope.products.slice(0,10);
-    	$scope.catFilter();
-    });
-    $scope.LoadMoreData = function() {
-		 $scope.upLimit += 10;
-		 $scope.displayedProducts = $scope.products.slice(0,$scope.upLimit);
-	}
-    $scope.upLimit=10;
-
-
-
-
-    $scope.playSound = function(){
-    	$scope.audio.play();
-    }
-    $scope.audio = new Audio('assets/sounds/Ka-Ching.wav');
-    $scope.categories = [];
-    $scope.categories.push("All");
-    $scope.currentCategory = "All";
-
-
-
-    $scope.change = function(option){
-        
-        $scope.currentCategory=option;
-        console.log($scope.currentCategory);
-    };
-
-    $scope.catFilter=function(){
-	    	angular.forEach($scope.products, function(product){
-	        var cat = product.categoriesRaw;
-	        angular.forEach(cat, function(val){
-	            if($scope.categories.indexOf(val) == -1) {
-	                $scope.categories.push(val);
-	                $scope.currentCategory=val;
-	            }
-	        });
-	    });
-    }
-
-
-    $scope.cartProducts = [];
-    $scope.addProduct = function(prod){
-    	$scope.addPro = this;
-    	$scope.prod=prod;
-    	if($scope.cartProducts.indexOf($scope.prod) == -1){
-    			$scope.prod.qInCart = 1;
-                $scope.cartProducts.push($scope.prod);
-            }
-         else{
-         	$scope.prod.qInCart ++;
-         }
-
-    }
-    $scope.removeProduct = function(prod){
-    	if(prod.qInCart>1){
-    		prod.qInCart--;
-    	}
-    	else{
-    		var index = $scope.cartProducts.indexOf(prod);
-    		$scope.cartProducts.splice(index, 1);
-    	}
-    }
-
-    $scope.invoiceItems = [];
-    $scope.buyCart = function(){
-    	$scope.invoiceItems = $scope.cartProducts;
-    	$scope.cartProducts=[];
-    	$scope.playSound();
-    }
-
-});
-</script>
 </body>
 </html>
