@@ -23,14 +23,17 @@
 </header>
 
 <div class="shop" ng-app="myApp" ng-controller="customersCtrl">
-	<div class="gallery">
-		<div class="item" ng-repeat="product in products | productFilter: currentCategory" >
+	<div class="gallery" when-scrolled="LoadMoreData()">
+		<div class="item" ng-repeat="product in displayedProducts | productFilter: currentCategory" >
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
 				<li>{{product.name}}</li>
 				<li>{{product.price | currency:"$"}}</li>
 				<li><button ng-click="addProduct(product)">Add to cart</button></li>
 			</ul>
+			<div class="item_cats">
+				<div ng-repeat="c in product.categoriesRaw track by $index">{{c}}</div>
+			</div>
 		</div>
 		<div id="loader">
 			<img src="assets/gifs/loader.gif">
@@ -44,7 +47,6 @@
 			<select name="Categories" ng-model="category" ng-change="change(category)" ng-options="category for category in categories">
 				
 			</select> <br>
-			<label>Price range</label>
 			<div class="price">
 				<div class="price_base">
 					<div class="price_min" draggable="true">
@@ -64,7 +66,7 @@
 			    <td>{{ cartProduct.qInCart }}</td>
 			    <td><button ng-click="removeProduct(cartProduct)">-</button></td>
 			  </tr>
-			</table>
+			</table>	
 		<button ng-click="buyCart()">CHA-CHING</button>
 		</div>
 	</div>
@@ -77,35 +79,64 @@
 </div>
 
 <footer>
-	<div>Copiright @ 2015</div>
+	<div>Copyright @ 2015</div>
 </footer>
 
 <script>
 var app = angular.module('myApp', []);
+
+app.directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+        var raw = elm[0];
+        elm.bind('scroll', function() {
+            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+                scope.$apply(attr.whenScrolled);
+            }
+        });
+    };
+});
 
 app.filter('productFilter', function(){
     return function(products, category) {
         var filteredProducts = [];
         var products = products;
         var category = category;
+        var price_min = 0;
+    	var price_max = 100;
+
         angular.forEach(products, function(product) {
-            if(product.categoriesRaw.indexOf(category) != -1){
-                filteredProducts.push(product);
-            }
-            if(category == "All"){
-                filteredProducts.push(product);
-            }
+        	if(product.price >= price_min && product.price<=price_max){
+
+	            if(product.categoriesRaw.indexOf(category) != -1){
+	                filteredProducts.push(product);
+	            }
+	            if(category == "All"){
+	                filteredProducts.push(product);
+	            }
+	        }
         });
         return filteredProducts;
     }
 });
 
 app.controller('customersCtrl', function($scope, $http) {
-    $http.get("http://www.json-generator.com/api/json/get/cqHeVHQjKG?indent=2")
+	$scope.products;
+	$scope.displayedProducts;
+    $http.get("http://www.json-generator.com/api/json/get/crUhBLYYPm?indent=2")
     .success(function(response) {
     	$scope.products = response;
+    	$scope.displayedProducts = $scope.products.slice(0,10);
     	$scope.catFilter();
     });
+    $scope.LoadMoreData = function() {
+		 $scope.upLimit += 10;
+		 $scope.displayedProducts = $scope.products.slice(0,$scope.upLimit);
+	}
+    $scope.upLimit=10;
+
+
+
+
     $scope.playSound = function(){
     	$scope.audio.play();
     }
@@ -113,6 +144,8 @@ app.controller('customersCtrl', function($scope, $http) {
     $scope.categories = [];
     $scope.categories.push("All");
     $scope.currentCategory = "All";
+
+
 
     $scope.change = function(option){
         
@@ -131,6 +164,7 @@ app.controller('customersCtrl', function($scope, $http) {
 	        });
 	    });
     }
+
 
     $scope.cartProducts = [];
     $scope.addProduct = function(prod){
