@@ -4,7 +4,7 @@ angular
     .module('app')
     .controller('filterController', filterController);
 
-    function filterController(){
+    function filterController(filterService){
     	var filter = this;
 
         filter.filterMinPrice = 0;
@@ -19,11 +19,16 @@ angular
 
         filter.change = change;
         filter.currentCategory = "All";
+        
+        filter.products = filterService.getProducts();
+        filter.catFilter();
 
         function change (option){ 
                 filter.currentCategory=option;
                 console.log(filter.currentCategory);
         };
+
+
         function catFilter(){
                 angular.forEach(filter.products, function(product){
                     var cat = product.categoriesRaw;

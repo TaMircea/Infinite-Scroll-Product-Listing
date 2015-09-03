@@ -4,7 +4,7 @@ angular
     .module('app')
     .controller('galleryController', galleryController);
 
-    function galleryController($scope, productFetch){
+    function galleryController($scope, productFetch, filterService){
     	var gallery = this;
 
     	gallery.products;
@@ -19,6 +19,7 @@ angular
                  productFetch.getProducts(gallery.limit).then(function(products){
                     
                     gallery.products = products;
+                    filterService.setProducts(gallery.products)
                     
                 });
         }
