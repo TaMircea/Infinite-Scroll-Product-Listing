@@ -10,6 +10,11 @@
  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
 
  	<script src="app/app.js"></script>
+ 	<script src="app/shopController.js"></script>
+ 	<script src="app/productFilter.js"></script>
+ 	<script src="app/scrollerDirective.js"></script>
+ 	<script src="app/fetchService.js"></script>
+ 	
 </head>
 <body>
 
@@ -22,14 +27,14 @@
 	</nav>
 </header>
 
-<div class="shop" ng-app="myApp" ng-controller="customersCtrl">
-	<div class="gallery" when-scrolled="LoadMoreData()">
-		<div class="item" ng-repeat="product in displayedProducts | productFilter: {category: currentCategory, min: filterMinPrice, max:filterMaxPrice}" >
+<div class="shop" ng-app="app" ng-controller="customersCtrl as shop">
+	<div class="gallery" when-scrolled="shop.LoadMoreData()">
+		<div class="item" ng-repeat="product in shop.displayedProducts | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice}" >
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
 				<li>{{product.name}}</li>
 				<li>{{product.price | currency:"$"}}</li>
-				<li><button ng-click="addProduct(product)">Add to cart</button></li>
+				<li><button ng-click="shop.addProduct(product)">Add to cart</button></li>
 			</ul>
 			<div class="item_cats">
 				<div ng-repeat="c in product.categoriesRaw track by $index">{{c}}</div>
@@ -44,13 +49,13 @@
 		<div class="filter">
 			<h4>Filter</h4>
 			<label>Category</label>
-			<select name="Categories" ng-model="category" ng-change="change(category)" ng-options="category for category in categories">
+			<select name="Categories" ng-model="shop.category" ng-change="shop.change(shop.category)" ng-options="category for category in shop.categories">
 				
 			</select> <br>
-			<input type="range" min="0" max="{{filterMaxPrice}}" step="1" ng-model="filterMinPrice"/>
-			<input type="range" min="{{filterMinPrice}}" max="100" step="1" ng-model="filterMaxPrice"/>
-			<span>{{filterMinPrice}}</span>
-			<span>{{filterMaxPrice}}</span>
+			<input type="range" min="0" max="{{shop.filterMaxPrice}}" step="1" ng-model="shop.filterMinPrice"/>
+			<input type="range" min="{{shop.filterMinPrice}}" max="100" step="1" ng-model="shop.filterMaxPrice"/>
+			<span>{{shop.filterMinPrice}}</span>
+			<span>{{shop.filterMaxPrice}}</span>
 			<div class="price">
 				<div class="price_base">
 					<div class="price_min" draggable="true">
@@ -65,16 +70,16 @@
 		<div class="cart">
 			<h4>Cart</h4>
 			<table class="productList">
-			  <tr ng-repeat="cartProduct in cartProducts">
+			  <tr ng-repeat="cartProduct in shop.cartProducts">
 			    <td>{{ cartProduct.name }}</td>
 			    <td>{{ cartProduct.qInCart }}</td>
-			    <td><button ng-click="removeProduct(cartProduct)">-</button></td>
+			    <td><button ng-click="shop.removeProduct(cartProduct)">-</button></td>
 			  </tr>
 			</table>	
-		<button ng-click="buyCart()">CHA-CHING</button>
+		<button ng-click="shop.buyCart()">CHA-CHING</button>
 		</div>
 	</div>
-	<div ng-repeat="item in invoiceItems">
+	<div ng-repeat="item in shop.invoiceItems">
 		<span>{{ item.name }}</span>
 		<span>{{ item.qInCart }}</span>
 		<span>{{ item.price | currency:"$" }}</span>
