@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Store</title>
 	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -10,86 +11,36 @@
  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
 
  	<script src="app/app.js"></script>
- 	<script src="app/shopController.js"></script>
  	<script src="app/productFilter.js"></script>
  	<script src="app/scrollerDirective.js"></script>
+
  	<script src="app/fetchService.js"></script>
- 	
+ 	<script src="app/filter/filterDirective.js"></script>
+ 	<script src="app/cart/cartDirective.js"></script>
+ 	<script src="app/gallery/galleryDirective.js"></script>	
 </head>
+
 <body>
+	<header>
+		<nav>
+			<div>Home</div>
+			<div>Shop</div>
+			<div>About</div>
+			<div>Contact</div>
+		</nav>
+	</header>
 
-<header>
-	<nav>
-		<div>Home</div>
-		<div>Shop</div>
-		<div>About</div>
-		<div>Contact</div>
-	</nav>
-</header>
-
-<div class="shop" ng-app="app" ng-controller="customersCtrl as shop">
-	<div class="gallery" when-scrolled="shop.LoadMoreData()">
-		<div class="item" ng-repeat="product in shop.displayedProducts | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice}" >
-			<img ng-src="{{product.picture}}">
-			<ul class="item_info">
-				<li>{{product.name}}</li>
-				<li>{{product.price | currency:"$"}}</li>
-				<li><button ng-click="shop.addProduct(product)">Add to cart</button></li>
-			</ul>
-			<div class="item_cats">
-				<div ng-repeat="c in product.categoriesRaw track by $index">{{c}}</div>
-			</div>
-		</div>
-		<div id="loader">
-			<img src="assets/gifs/loader.gif">
+	<div class="shop" ng-app="app">
+		<my-gallery-directive></my-gallery-directive>
+		<div class="side-content">
+			<my-filter-directive></my-filter-directive>
+			<my-cart-directive></my-cart-directive>
 		</div>
 	</div>
-
-	<div class="side-content">
-		<div class="filter">
-			<h4>Filter</h4>
-			<label>Category</label>
-			<select name="Categories" ng-model="shop.category" ng-change="shop.change(shop.category)" ng-options="category for category in shop.categories">
-				
-			</select> <br>
-			<input type="range" min="0" max="{{shop.filterMaxPrice}}" step="1" ng-model="shop.filterMinPrice"/>
-			<input type="range" min="{{shop.filterMinPrice}}" max="100" step="1" ng-model="shop.filterMaxPrice"/>
-			<span>{{shop.filterMinPrice}}</span>
-			<span>{{shop.filterMaxPrice}}</span>
-			<div class="price">
-				<div class="price_base">
-					<div class="price_min" draggable="true">
-						
-					</div>
-					<div class="price_max" draggable="true">
-						
-					</div>					
-				</div>				
-			</div>
-		</div>
-		<div class="cart">
-			<h4>Cart</h4>
-			<table class="productList">
-			  <tr ng-repeat="cartProduct in shop.cartProducts">
-			    <td>{{ cartProduct.name }}</td>
-			    <td>{{ cartProduct.qInCart }}</td>
-			    <td><button ng-click="shop.removeProduct(cartProduct)">-</button></td>
-			  </tr>
-			</table>	
-		<button ng-click="shop.buyCart()">CHA-CHING</button>
-		<button ng-click="shop.LoadMoreData()">Fetch more</button>
-		</div>
-	</div>
-	<div ng-repeat="item in shop.invoiceItems">
-		<span>{{ item.name }}</span>
-		<span>{{ item.qInCart }}</span>
-		<span>{{ item.price | currency:"$" }}</span>
-		<span>{{ (item.qInCart * item.price) | currency:"$" }}</span>	
-	</div>
-</div>
-<footer>
-	<div>Copyright @ 2015</div>
-</footer>
+		
+	<footer>
+		<div>Copyright @ 2015</div>
+	</footer>
 
 </body>
 </html>

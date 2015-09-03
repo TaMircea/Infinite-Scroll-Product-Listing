@@ -1,0 +1,12 @@
+<div class="cart">
+	<h4>Cart</h4>
+	<table class="productList">
+		<tr ng-repeat="cartProduct in shop.cartProducts">
+			<td>{{ cartProduct.name }}</td>
+			<td>{{ cartProduct.qInCart }}</td>
+			<td><button ng-click="shop.removeProduct(cartProduct)">-</button></td>
+		</tr>
+	</table>	
+	<button ng-click="shop.buyCart()">CHA-CHING</button>
+	<button ng-click="shop.LoadMoreData()">Fetch more</button>
+</div>
