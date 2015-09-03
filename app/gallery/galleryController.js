@@ -2,23 +2,24 @@
     'use strict';
 angular
     .module('app')
-    .controller('galleryCtrl', galleryCtrl);
+    .controller('galleryController', galleryController);
 
-    function galleryCtrl(productFetch){
+    function galleryController($scope, productFetch){
     	var gallery = this;
 
     	gallery.products;
         gallery.LoadProduct=LoadProduct;
-      	gallery.LoadProduct();
       	gallery.LoadMoreData = LoadMoreData;
-      	gallery.limit=0;
+      	gallery.limit=1;
+
+        gallery.LoadProduct();
 
       	function LoadProduct(){
                 gallery.limit += 20;
                  productFetch.getProducts(gallery.limit).then(function(products){
                     
                     gallery.products = products;
-                    gallery.catFilter();
+                    
                 });
         }
         function LoadMoreData() {
