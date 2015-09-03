@@ -29,7 +29,7 @@
 
 <div class="shop" ng-app="app" ng-controller="customersCtrl as shop">
 	<div class="gallery" when-scrolled="shop.LoadMoreData()">
-		<div class="item" ng-repeat="product in shop.displayedProducts" >
+		<div class="item" ng-repeat="product in shop.displayedProducts | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice}" >
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
 				<li>{{product.name}}</li>
