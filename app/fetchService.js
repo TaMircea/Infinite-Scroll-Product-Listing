@@ -7,12 +7,13 @@ angular
                     getProducts: getProducts
               });
 
-		function getProducts() {
+		function getProducts(limit) {
         	var request = $http({
                 method: "get",
-                url: "http://www.json-generator.com/api/json/get/crUhBLYYPm?indent=2",
+                url: "data/products.php",
                 params: {
-                    action: "get"
+                    action: "get",
+                    limit: limit
                 }
             });
             return( request.then( handleSuccess, handleError ) );
@@ -28,7 +29,7 @@ angular
                     return( $q.reject( response.data.message ) );
         }
         function handleSuccess( response ) {
-                    return( response.data );
+                    return( response.data ); 
         }
 
 	}

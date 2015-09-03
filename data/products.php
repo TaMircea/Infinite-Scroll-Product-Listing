@@ -12,8 +12,9 @@ $dbhandle = mysql_connect($hostname, $username, $password)
 $selected = mysql_select_db("Shop",$dbhandle) 
   or die("Could not select shop");
 
+$limit = $_GET["limit"];
 //execute the SQL query and return records
-$result = mysql_query(" SELECT name, price, picture FROM Products  ");
+$result = mysql_query(" SELECT name, price, picture FROM Products LIMIT $limit ");
 
 
 //fetch tha data from the database 
@@ -23,15 +24,7 @@ $result = mysql_query(" SELECT name, price, picture FROM Products  ");
     	
 
 
-    	$cats = mysql_query("SELECT Catname as category FROM Categories");
-
-    	$jsonCategories = array();
-
-    	while ($cat=mysql_fetch_assoc($cats)) {
-    		$jsonCategories[]=$cat['category'];	
-    	}
-
-    	$res["categoriesRaw"] = $jsonCategories;
+    	
     	$jsonData[] = $res;
 	
 	}

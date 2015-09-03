@@ -16,7 +16,7 @@ angular
 
         	vm.displayedProducts = [];
 
-            vm.upLimit=10;
+            vm.limit=0;
             vm.LoadMoreData = LoadMoreData;
 
             vm.playSound = playSound;
@@ -34,27 +34,30 @@ angular
             vm.filterMaxPrice = 100;
 
 
+
             vm.addProduct = addProduct;
             vm.removeProduct = removeProduct;
             vm.cartProducts = [];
             
             vm.buyCart = buyCart;
             vm.invoiceItems = [];
+
+            vm.LoadProduct=LoadProduct;
             
-            LoadProduct();
+            vm.LoadProduct();
             //////////////
             function LoadProduct(){
-                 productFetch.getProducts().then(function(products){
+                vm.limit += 20;
+                 productFetch.getProducts(vm.limit).then(function(products){
                     
-                    vm.displayedProducts = products.slice(0,vm.upLimit);
+                    vm.displayedProducts = products;
                     vm.products = products;
                     vm.catFilter();
                 });
             }
 
             function LoadMoreData() {
-                 vm.upLimit += 10;
-                 vm.displayedProducts = vm.products.slice(0,vm.upLimit);
+                 vm.LoadProduct();
             }
             function playSound (){
                 vm.audio.play();
