@@ -17,7 +17,7 @@ app.filter('productFilter', function(){
         var products = products;
         var category = options.category;
         var price_min = options.min;
-    	var price_max = 200;
+    	var price_max = options.max;
 
         angular.forEach(products, function(product) {
         	if(product.price >= price_min && product.price<=price_max){
@@ -37,7 +37,7 @@ app.filter('productFilter', function(){
 app.controller('customersCtrl', function($scope, $http) {
 	$scope.products;
 	$scope.displayedProducts;
-    $http.get("data/products.php")
+    $http.get("http://www.json-generator.com/api/json/get/crUhBLYYPm?indent=2")
     .success(function(response) {
     	console.log(response);
     	$scope.products = response;
@@ -61,6 +61,7 @@ app.controller('customersCtrl', function($scope, $http) {
     $scope.categories.push("All");
     $scope.currentCategory = "All";
     $scope.filterMinPrice = 0;
+    $scope.filterMaxPrice = 100;
 
 
     $scope.change = function(option){

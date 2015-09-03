@@ -24,7 +24,7 @@
 
 <div class="shop" ng-app="myApp" ng-controller="customersCtrl">
 	<div class="gallery" when-scrolled="LoadMoreData()">
-		<div class="item" ng-repeat="product in displayedProducts | productFilter: {category: currentCategory, min: filterMinPrice}" >
+		<div class="item" ng-repeat="product in displayedProducts | productFilter: {category: currentCategory, min: filterMinPrice, max:filterMaxPrice}" >
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
 				<li>{{product.name}}</li>
@@ -47,7 +47,10 @@
 			<select name="Categories" ng-model="category" ng-change="change(category)" ng-options="category for category in categories">
 				
 			</select> <br>
-			<input type="range" min="0" max="100" step="1" ng-model="filterMinPrice"/>
+			<input type="range" min="0" max="{{filterMaxPrice}}" step="1" ng-model="filterMinPrice"/>
+			<input type="range" min="{{filterMinPrice}}" max="100" step="1" ng-model="filterMaxPrice"/>
+			<span>{{filterMinPrice}}</span>
+			<span>{{filterMaxPrice}}</span>
 			<div class="price">
 				<div class="price_base">
 					<div class="price_min" draggable="true">
