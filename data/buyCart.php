@@ -2,19 +2,44 @@
 $username = "root";
 $password = "root";
 $hostname = "localhost"; 
+$database = "Shop";
 
 
-$dbhandle = mysql_connect($hostname, $username, $password) 
- or die("Unable to connect to MySQL");
+$conn = new mysqli($hostname, $username, $password, $database);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
 
-$selected = mysql_select_db("Shop",$dbhandle) 
-  or die("Could not select shop");
+$newOrder = "INSERT INTO OrdersBig (buyer)
+	VALUES ('John')";
 
+$data = json_decode(file_get_contents("php://input"), true);
 
-$data = json_decode(file_get_contents("php://input"));
+if ($conn->query($newOrder) === TRUE) {
 
-print_r(array_values($data));
+    echo "New order successfully";
 
-mysql_close($dbhandle);
+    $currOrder = mysqli_insert_id($conn);
+
+	foreach ($data as $value){  
+
+		$id = $value['Id'];
+		$qInCart = $value['qInCart'];
+
+	    $newOrderLine = "INSERT INTO Orders ( id, productId, quantity) VALUES ('$currOrder','$id','$qInCart')";
+	    if ($conn->query($newOrderLine) === TRUE) {
+	    	echo "New line inserted";
+	    }
+	    else{
+	    	echo "Error: " . $newOrderLine . "<br>" . $conn->error;
+	    }
+	}
+
+} 
+else {
+    echo "Error: " . $newOrder . "<br>" . $conn->error;
+}
+
+$conn->close();
 
 ?> 
