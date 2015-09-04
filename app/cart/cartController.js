@@ -4,6 +4,7 @@ angular
     .module('app')
     .controller('cartController', cartController);
 
+    cartController.$inject = ['$rootScope', '$scope', 'productCartService', 'storeService']
     function cartController($rootScope, $scope, productCartService, storeService){
 			var vm = this;   	
             vm.playSound = playSound;

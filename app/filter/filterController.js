@@ -4,6 +4,7 @@ angular
     .module('app')
     .controller('filterController', filterController);
 
+    filterController.$inject = ['$rootScope', '$scope', 'filterService']
     function filterController($rootScope, $scope, filterService){
     	var vm = this;
 

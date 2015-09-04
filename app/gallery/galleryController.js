@@ -4,6 +4,8 @@ angular
     .module('app')
     .controller('galleryController', galleryController);
 
+    galleryController.$inject = ['$rootScope', '$scope', 'productFetch', 'filterService', 'productCartService']
+
     function galleryController($rootScope, $scope, productFetch, filterService, productCartService){
     	var vm = this;
 
