@@ -4,27 +4,48 @@ angular
     .module('app')
     .controller('galleryController', galleryController);
 
-    function galleryController($scope, productFetch, filterService){
-    	var gallery = this;
+    function galleryController($rootScope, $scope, productFetch, filterService, productCartService){
+    	var vm = this;
 
-    	gallery.products;
-        gallery.LoadProduct=LoadProduct;
-      	gallery.LoadMoreData = LoadMoreData;
-      	gallery.limit=1;
+    	vm.products;
+        vm.LoadProduct=LoadProduct;
+      	vm.LoadMoreData = LoadMoreData;
+        vm.sendProductToCart = sendProductToCart;
+      	vm.limit=1;
+        vm.currentCategory = "All";
 
-        gallery.LoadProduct();
+        vm.filterMinPrice = 0;
+        vm.filterMaxPrice = 100;
+
+        vm.LoadProduct();
+
+        $scope.$on('categoryChanged', function(events, args){
+            vm.currentCategory = args;
+        });
+        $scope.$on('minPriceChanged', function(events, args){
+            vm.filterMinPrice = args;
+        });
+        $scope.$on('maxPriceChanged', function(events, args){
+            vm.filterMaxPrice = args;
+        });
+
 
       	function LoadProduct(){
-                gallery.limit += 20;
-                 productFetch.getProducts(gallery.limit).then(function(products){
-                    
-                    gallery.products = products;
-                    filterService.setProducts(gallery.products)
+                vm.limit += 20;
+                 productFetch.getProducts(vm.limit).then(function(products){
+
+                    vm.products = products;
+                    filterService.setProducts(vm.products);
+                    $rootScope.$broadcast('loadCats', products);
                     
                 });
         }
         function LoadMoreData() {
-            gallery.LoadProduct();
+            vm.LoadProduct();
+        }
+        function sendProductToCart(product){
+            productCartService.setProduct(product);
+            $rootScope.$broadcast('addToCart', product)
         }
 
 

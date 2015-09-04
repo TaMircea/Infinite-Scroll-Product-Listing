@@ -4,7 +4,7 @@ angular
     .module('app')
     .controller('cartController', cartController);
 
-    function cartController(){
+    function cartController($rootScope, $scope, productCartService, storeService){
 			var vm = this;   	
             vm.playSound = playSound;
             vm.audio = new Audio('assets/sounds/Ka-Ching.wav');
@@ -17,6 +17,11 @@ angular
             vm.invoiceItems = [];
 
             //////////////
+            
+            $scope.$on('addToCart', function(events, args){
+                console.log(args);
+                vm.addProduct(args);
+            });
 
             function playSound (){
                 vm.audio.play();
@@ -42,7 +47,7 @@ angular
                 }
             }
             function buyCart () {
-                vm.invoiceItems = vm.cartProducts;
+                storeService.buyProducts(vm.cartProducts)
                 vm.cartProducts=[];
                 vm.playSound();
             }

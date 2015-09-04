@@ -1,10 +1,10 @@
 <div class="gallery" when-scrolled="shop.LoadMoreData()" ng-controller="galleryController as shop">
-		<div class="item" ng-repeat="product in shop.products " >
+		<div class="item" ng-repeat="product in shop.products  | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice} " >
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
 				<li>{{product.name}}</li>
 				<li>{{product.price | currency:"$"}}</li>
-				<li><button ng-click="shop.addProduct(product)">Add to cart</button></li>
+				<li><button ng-click="shop.sendProductToCart(product)">Add to cart</button></li>
 			</ul>
 			<div class="item_cats">
 				<div ng-repeat="c in product.categoriesRaw track by $index">{{c}}</div>

@@ -4,41 +4,55 @@ angular
     .module('app')
     .controller('filterController', filterController);
 
-    function filterController(filterService){
-    	var filter = this;
+    function filterController($rootScope, $scope, filterService){
+    	var vm = this;
 
-        filter.filterMinPrice = 0;
-        filter.filterMaxPrice = 100;
+        vm.filterMinPrice = 0;
+        vm.filterMaxPrice = 100;
+        vm.setMinPrice = setMinPrice;
+        vm.setMaxPrice = setMaxPrice;
 
 
 
-    	filter.catFilter = catFilter;
-        filter.products = [];
-        filter.categories = [];
-        filter.categories.push("All");
+    	vm.catFilter = catFilter;
+        vm.products = [];
+        vm.categories = [];
+        vm.categories.push("All");
 
-        filter.change = change;
-        filter.currentCategory = "All";
+        vm.change = change;
+        vm.currentCategory = "All";
         
-        filter.products = filterService.getProducts();
-        filter.catFilter();
+
+         $scope.$on('loadCats', function(events, args){
+                vm.products = args;
+                vm.catFilter();
+        });
 
         function change (option){ 
-                filter.currentCategory=option;
-                console.log(filter.currentCategory);
+                vm.currentCategory=option;
+                console.log(vm.currentCategory);
+                $rootScope.$broadcast('categoryChanged', option);
         };
 
 
         function catFilter(){
-                angular.forEach(filter.products, function(product){
+/*                vm.products = filterService.getProducts();*/
+                angular.forEach(vm.products, function(product){
                     var cat = product.categoriesRaw;
                     angular.forEach(cat, function(val){
-                    if(filter.categories.indexOf(val) == -1) {
-                        filter.categories.push(val);
-                        filter.currentCategory=val;
+                    if(vm.categories.indexOf(val) == -1) {
+                        vm.categories.push(val);
+                        vm.currentCategory=val;
                     }
                 });
             });
         }
+
+        function setMinPrice(){
+            $rootScope.$broadcast('minPriceChanged', vm.filterMinPrice);
+        };
+        function setMaxPrice(){
+            $rootScope.$broadcast('maxPriceChanged', vm.filterMaxPrice);
+        };
 	}
 })();

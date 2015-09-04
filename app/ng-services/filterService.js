@@ -16,6 +16,5 @@ angular
 
 		function setProducts(products){
 			products = products;
-			catFilter(products);
 		}
 	}

@@ -5,7 +5,6 @@ angular
     .module('app')
     .filter('productFilter', productFilter);
 
-
         function productFilter(){
             return function(products, options) {
                 var filteredProducts = [];
