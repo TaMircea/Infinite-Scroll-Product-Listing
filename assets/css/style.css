@@ -21,6 +21,7 @@ footer{
 footer div{
 	margin: 10px;
 }
+
 .gallery{
 	display: inline-block;
 	max-width: 70%;
@@ -115,4 +116,11 @@ footer div{
 }
 .price_max{
 	right: 0;
+}
+.inactive{
+	display: none;
+	margin: 5% 50%;
+}
+.active{
+	display: block;
 }

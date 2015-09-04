@@ -12,7 +12,7 @@ $selected = mysql_select_db("Shop",$dbhandle)
 
 $limit = $_GET["limit"];
 
-$result = mysql_query(" SELECT Id, name, price, picture FROM Products LIMIT $limit ");
+$result = mysql_query(" SELECT Id, name, price, picture FROM Products LIMIT $limit, 20 ");
     
 
 	$jsonData = array();

@@ -9,11 +9,12 @@ angular
     function galleryController($rootScope, $scope, productFetch, filterService, productCartService){
     	var vm = this;
 
-    	vm.products;
+        vm.loading = false;
+    	vm.products = [];
         vm.LoadProduct=LoadProduct;
       	vm.LoadMoreData = LoadMoreData;
         vm.sendProductToCart = sendProductToCart;
-      	vm.limit=1;
+      	vm.limit=0;
         vm.currentCategory = "All";
 
         vm.filterMinPrice = 0;
@@ -33,13 +34,14 @@ angular
 
 
       	function LoadProduct(){
-                vm.limit += 20;
+                vm.loading = true;
                  productFetch.getProducts(vm.limit).then(function(products){
 
-                    vm.products = products;
+                    vm.products.push.apply(vm.products, products);
                     filterService.setProducts(vm.products);
                     $rootScope.$broadcast('loadCats', products);
-                    
+                    vm.loading = false;   
+                    vm.limit += 20;                 
                 });
         }
         function LoadMoreData() {
