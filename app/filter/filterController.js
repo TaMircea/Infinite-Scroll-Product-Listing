@@ -8,7 +8,7 @@ angular
     function filterController($rootScope, $scope){
     	var vm = this;
 
-        vm.filtersShown = false;
+        vm.filtersShown = true;
         vm.showFilters = showFilters;
         vm.hideFilters = hideFilters;
 

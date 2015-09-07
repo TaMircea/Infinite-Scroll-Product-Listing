@@ -166,3 +166,69 @@ footer div{
 
 
 
+.rangeLeft,
+.rangeRight {
+	height: 10px;
+	background: #efefef;
+    display: inline-block;
+	background: -ms-linear-gradient(top, #efefef 0%,#ffffff 100%);
+	border: 1px solid #ccc;
+    position: absolute;
+	box-shadow: inset 0 1px 0 #fff;
+	border-radius: 7px;
+}
+.rangeLeft {
+    left: 0;
+}
+.rangeRight {
+    right: 0;
+}
+
+.rangeContainer {
+    background: #6EBAFF ;
+    background: linear-gradient(to bottom, #6EBAFF  0, #80A7C8 100%);
+    height: 12px;
+    border-radius: 7px;
+    position: relative;
+	width: 100%;
+}
+
+.spinLeft {
+    float: right;
+    margin: -4px -8px 0 0;
+}
+
+.spinRight {
+    float: left;
+    margin: -4px 0 0 -6px;
+}
+
+.spinLeft,
+.spinRight {
+    background: #529de1;
+	display: inline-block;
+	background: linear-gradient(to bottom, #529de1 0, #245e8f 100%);
+	border-radius: 15px;
+    position: relative;
+	border: 5px solid #fff;
+	width: 7px;
+	height: 7px;
+	box-shadow: 0 0 1px #555;
+	cursor: pointer;
+}
+
+.spinLeft.active,
+.spinRight.active {
+ 	background: #fff;
+ 	border: 5px solid #ff0000;
+}
+
+.btnRange.from {
+    float: left;
+}
+
+.btnRange.to {
+    float: right;
+}
+
+

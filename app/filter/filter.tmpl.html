@@ -12,5 +12,7 @@
 		<input type="range" min="{{shop.filterMinPrice}}" max="100" step="1" ng-model="shop.filterMaxPrice" ng-change="shop.setMaxPrice()"/>
 		<span>{{shop.filterMinPrice}}</span>
 		<span>{{shop.filterMaxPrice}}</span>
+
+		<my-price-range-directive></my-price-range-directive>
 	</div>
 </div>
