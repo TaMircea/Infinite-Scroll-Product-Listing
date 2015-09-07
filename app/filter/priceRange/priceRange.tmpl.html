@@ -1,10 +1,12 @@
-<div class = "ranger" ng-controller="priceRangeController">
+<div class = "ranger" ng-controller="priceRangeController as range">
 	<div class="rangeContainer">
-		<span class="rangeLeft">
+		<span ng-model="range.filterMinRange" class="rangeLeft">
 			<i class="spinLeft"></i>
 		</span>
 		<span class="rangeRight">
-			<i class="spinRight"></i>
+			<i ng-model="range.filterMaxRange" class="spinRight"></i>
 		</span>
 	</div>
+	<div> {{range.filterMinRange}}</div>
+	<div>{{range.filterMaxRange}}</div>
 </div>

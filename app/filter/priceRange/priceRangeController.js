@@ -8,6 +8,8 @@ angular
 
     function priceRangeController($rootScope, $scope){
 
+    	var vm = this;
+
     	function getDomElement(element, all) {
 			if (all && all !== undefined) {
 				return document.querySelectorAll(element);
@@ -27,6 +29,9 @@ angular
 
 		$scope.minRange = 0;
 		$scope.maxRange = 100;
+
+		vm.filterMinRange = 0;
+		vm.filterMaxRange = 100;
 
 		function fixEvent(event) {
 		event = event || window.event;
@@ -63,6 +68,8 @@ angular
 				if (range >= $scope.minRange) {
 					
 					rangeLeft.style.width = positionPercent+'%';
+					vm.filterMinRange = range;
+					setMinPrice();
 				}
 			}
 
@@ -71,6 +78,8 @@ angular
 				
 					
 					rangeRight.style.width = newPosRightSpin+'%';
+					vm.filterMaxRange = range;
+					setMaxPrice();
 				
 			}
 		}
@@ -108,6 +117,14 @@ angular
 
 		return Math.round(left);
 	};
+
+	function setMinPrice(){
+           $rootScope.$broadcast('minPriceChanged', vm.filterMinRange);
+           console.log("Min price sent by range "+vm.filterMinRange)
+        };
+    function setMaxPrice(){
+           $rootScope.$broadcast('maxPriceChanged', vm.filterMaxRange);
+   		};
 
 
 

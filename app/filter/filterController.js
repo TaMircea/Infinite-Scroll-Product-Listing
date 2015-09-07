@@ -28,8 +28,8 @@ angular
         vm.currentCategory = "All";
 
          $scope.$on('loadCats', function(events, args){
-                vm.products = args;
-                vm.catFilter();
+            vm.products = args;
+            vm.catFilter();
         });
 
         function change (option){ 

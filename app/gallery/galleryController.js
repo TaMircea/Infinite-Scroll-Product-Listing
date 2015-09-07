@@ -28,11 +28,11 @@ angular
         });
         $scope.$on('minPriceChanged', function(events, args){
             vm.filterMinPrice = args;
+            console.log("Gallery min price" + vm.filterMinPrice)
         });
         $scope.$on('maxPriceChanged', function(events, args){
             vm.filterMaxPrice = args;
         });
-
 
       	function LoadProduct(){
                 vm.loading = true;
