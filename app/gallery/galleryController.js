@@ -4,9 +4,9 @@ angular
     .module('app')
     .controller('galleryController', galleryController);
 
-    galleryController.$inject = ['$rootScope', '$scope', 'productFetch', 'filterService', 'productCartService']
+    galleryController.$inject = ['$rootScope', '$scope', 'productFetch']
 
-    function galleryController($rootScope, $scope, productFetch, filterService, productCartService){
+    function galleryController($rootScope, $scope, productFetch){
     	var vm = this;
 
         vm.loading = false;
@@ -19,6 +19,7 @@ angular
 
         vm.filterMinPrice = 0;
         vm.filterMaxPrice = 100;
+        vm.sendProductInfo = sendProductInfo;
 
         vm.LoadProduct();
 
@@ -38,7 +39,6 @@ angular
                  productFetch.getProducts(vm.limit).then(function(products){
 
                     vm.products.push.apply(vm.products, products);
-                    filterService.setProducts(vm.products);
                     $rootScope.$broadcast('loadCats', products);
                     vm.loading = false;   
                     vm.limit += 20;                 
@@ -48,8 +48,10 @@ angular
             vm.LoadProduct();
         }
         function sendProductToCart(product){
-            productCartService.setProduct(product);
-            $rootScope.$broadcast('addToCart', product)
+            $rootScope.$broadcast('addToCart', product);
+        }
+        function sendProductInfo(product){
+            $rootScope.$broadcast('showProduct', product);
         }
 
 

@@ -1,7 +1,9 @@
 <div class="gallery" when-scrolled="shop.LoadMoreData()" ng-controller="galleryController as shop">
-		<div class="item" ng-repeat="product in shop.products  | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice} " >
+	<div ng-view></div>
+		<div class="item" ng-repeat="product in shop.products  | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice} "  >
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
+				<a ng-click="shop.sendProductInfo(product)" href="#Products/{{product.name}}" >See info</a>
 				<li>{{product.name}}</li>
 				<li>{{product.price | currency:"$"}}</li>
 				<li><button ng-click="shop.sendProductToCart(product)">Add to cart</button></li>
