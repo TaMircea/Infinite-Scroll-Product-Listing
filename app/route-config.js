@@ -6,7 +6,10 @@ angular
 function config($routeProvider) {
     $routeProvider
         .when('/Products/:name', {
-            templateUrl: 'app/product/product.tmpl.html',
+            templateUrl: 'app/product/product.tmpl.html',  
+        })
+        .when('/', {
+            templateUrl: 'app/gallery/gallery.htm',
             
         });
 }
