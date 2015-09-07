@@ -23,6 +23,7 @@ footer div{
 }
 
 .gallery{
+	position: relative;
 	display: inline-block;
 	max-width: 70%;
 	height: 750px;
@@ -36,11 +37,27 @@ footer div{
 	padding: 1%;
 	position: fixed;
 	right: 1%;
-	top: 10%;
+	top: 15%;
 	border-radius: 5px;
 	border:1px solid black;
 }
-.cart{
+
+.filter_icon{
+	padding: 0;
+	border-radius: 5px;
+	border:1px solid black;
+
+	position: fixed;
+	right: 1%;
+	top: 15%;
+}
+.filter_icon:hover{
+	background: salmon;
+	transition: all 0.5s;
+	cursor: pointer;
+}
+.cart,
+.cart_icon{
 	padding: 1%;
 	position: fixed;
 	right: 1%;
@@ -48,7 +65,29 @@ footer div{
 	border-radius: 5px;
 	border:1px solid black;
 }
-
+.cart_icon{
+	padding: 0;
+}
+.cart_icon:hover{
+	background: salmon;
+	transition: all 0.5s;
+	cursor: pointer;
+}
+.closeBtn{
+	border: 1px solid white;
+	padding: 3px 3px 4px 3px;
+	border-radius: 50%;
+	width: 5px;
+	height: 5px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: white;
+	background: black;
+	font-size: 40%;
+	text-align: center;
+	cursor: pointer;
+}
 .productList td {
 	padding: 4% 10%;
 }
@@ -124,3 +163,6 @@ footer div{
 .active{
 	display: block;
 }
+
+
+

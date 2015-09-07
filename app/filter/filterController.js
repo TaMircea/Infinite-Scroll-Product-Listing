@@ -4,16 +4,20 @@ angular
     .module('app')
     .controller('filterController', filterController);
 
-    filterController.$inject = ['$rootScope', '$scope', 'filterService']
-    function filterController($rootScope, $scope, filterService){
+    filterController.$inject = ['$rootScope', '$scope']
+    function filterController($rootScope, $scope){
     	var vm = this;
+
+        vm.filtersShown = false;
+        vm.showFilters = showFilters;
+        vm.hideFilters = hideFilters;
+
+
 
         vm.filterMinPrice = 0;
         vm.filterMaxPrice = 100;
         vm.setMinPrice = setMinPrice;
         vm.setMaxPrice = setMaxPrice;
-
-
 
     	vm.catFilter = catFilter;
         vm.products = [];
@@ -22,7 +26,6 @@ angular
 
         vm.change = change;
         vm.currentCategory = "All";
-        
 
          $scope.$on('loadCats', function(events, args){
                 vm.products = args;
@@ -37,7 +40,6 @@ angular
 
 
         function catFilter(){
-/*                vm.products = filterService.getProducts();*/
                 angular.forEach(vm.products, function(product){
                     var cat = product.categoriesRaw;
                     angular.forEach(cat, function(val){
@@ -55,5 +57,11 @@ angular
         function setMaxPrice(){
             $rootScope.$broadcast('maxPriceChanged', vm.filterMaxPrice);
         };
+        function showFilters(){
+            vm.filtersShown = true;
+        }
+        function hideFilters(){
+            vm.filtersShown = false;
+        }
 	}
 })();
