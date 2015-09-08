@@ -4,9 +4,9 @@ angular
     .module('app')
     .controller('galleryController', galleryController);
 
-    galleryController.$inject = ['$rootScope', '$scope', 'productFetch']
+    galleryController.$inject = ['$rootScope', '$scope', 'productFetch','$q']
 
-    function galleryController($rootScope, $scope, productFetch){
+    function galleryController($rootScope, $scope, productFetch, $q){
     	var vm = this;
 
         vm.loading = false;
@@ -19,11 +19,26 @@ angular
         vm.filterMinPrice = 0;
         vm.filterMaxPrice = 100;
         vm.sendProductInfo = sendProductInfo;
+        vm.sendFiltersData = sendFiltersData;
+
+        vm.min;vm.max;
+        vm.extremePrice = extremePrice;
 
         vm.LoadProduct();
 
         $scope.$on('categoryChanged', function(events, cat){
             vm.currentCategory = cat;
+
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+            promise.then(function success(data) {
+                  something();
+                }, function error(msg) {
+                  console.error(msg);
+                });
+            deferred.resolve(console.log('done'));
+
+            
         });
         $scope.$on('minPriceChanged', function(events, min){
             vm.filterMinPrice = min;
@@ -31,14 +46,20 @@ angular
         $scope.$on('maxPriceChanged', function(events, max){
             vm.filterMaxPrice = max;
         });
+        function something(){
+            vm.extremePrice(vm.filteredProducts);
+            vm.sendFiltersData(vm.filteredProducts, vm.min, vm.max);
+            console.log(vm.filteredProducts);
+            console.log(vm.min + ' '+ vm.max)
+        };
 
       	function LoadProduct(){
                 vm.loading = true;
                  productFetch.getProducts(vm.limit).then(function(products){
                     vm.products.push.apply(vm.products, products);
-                    var min = extremePrice(vm.products, 'min');
-                    var max = extremePrice(vm.products, 'max');
-                    $rootScope.$broadcast('loadCats', products, min, max);
+                    var min = vm.extremePrice(vm.products, 'min');
+                    var max = vm.extremePrice(vm.products, 'max');
+                    vm.sendFiltersData(products, min, max);
                     vm.loading = false;   
                     vm.limit += 20;                 
                 });
@@ -49,6 +70,9 @@ angular
         function sendProductInfo(product){
             $rootScope.$broadcast('showProduct', product); 
         }
+        function sendFiltersData(prod, min ,max){
+            $rootScope.$broadcast('loadCats', prod, min, max);
+        }
         function extremePrice(products,type){
             var max, min;
             var prices = [];
@@ -57,13 +81,18 @@ angular
             });
             prices.sort(function(a, b){return b-a});
             max = prices[0];
-            min = prices[prices.length-1]
+            min = prices[prices.length-1];
+
             if(type == 'max'){
                 return max;
             };
             if (type == 'min') {
                 return min;
             };
+            if(type == null){
+                vm.max = max;
+                vm.min = min;
+            }
 
         }
     }

@@ -32,7 +32,4 @@ $result = mysql_query(" SELECT Id, name, price, picture FROM Products LIMIT $lim
 	echo json_encode($jsonData, true);
 
 mysql_close($dbhandle);
-
-//SELECT Products.Name, Categories.Name FROM Products INNER JOIN ProductCategories ON Products.Id=ProductCategories.ProductId INNER JOIN Categories ON ProductCategories.CategoryId=Categories.ID WHERE Products.Id=1
-
 ?> 
