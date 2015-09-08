@@ -1,4 +1,4 @@
-<div class="gallery" when-scrolled="shop.LoadMoreData()" ng-controller="galleryController as shop">
+<div class="gallery" when-scrolled="shop.LoadProduct()" ng-controller="galleryController as shop">
 	<div ng-view></div>
 		<div class="item" ng-repeat="product in shop.products  | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice} "  >
 			<img ng-src="{{product.picture}}">
