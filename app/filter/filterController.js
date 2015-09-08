@@ -19,6 +19,9 @@ angular
         vm.setMinPrice = setMinPrice;
         vm.setMaxPrice = setMaxPrice;
 
+        vm.minRange;
+        vm.maxRange;
+
     	vm.catFilter = catFilter;
         vm.products = [];
         vm.categories = [];
@@ -26,10 +29,24 @@ angular
 
         vm.change = change;
         vm.currentCategory = "All";
+        vm.sendMinMaxRange = sendMinMaxRange
 
-         $scope.$on('loadCats', function(events, args){
-            vm.products = args;
+         $scope.$on('loadCats', function(events, products, min, max){
+            vm.products = products;
+            vm.minRange = min;
+            vm.maxRange = max;
+            vm.sendMinMaxRange();
+
             vm.catFilter();
+        });
+
+        $scope.$on('minRangeChanged', function(events, min){
+            vm.minRange = min;
+            vm.setMinPrice();
+        });
+        $scope.$on('maxRangeChanged', function(events, max){
+            vm.maxRange = max;
+            vm.setMaxPrice();
         });
 
         function change (option){ 
@@ -52,10 +69,10 @@ angular
         }
 
         function setMinPrice(){
-            $rootScope.$broadcast('minPriceChanged', vm.filterMinPrice);
+            $rootScope.$broadcast('minPriceChanged', vm.minRange);
         };
         function setMaxPrice(){
-            $rootScope.$broadcast('maxPriceChanged', vm.filterMaxPrice);
+            $rootScope.$broadcast('maxPriceChanged', vm.maxRange);
         };
         function showFilters(){
             vm.filtersShown = true;
@@ -63,5 +80,9 @@ angular
         function hideFilters(){
             vm.filtersShown = false;
         }
+        function sendMinMaxRange(){
+            $rootScope.$broadcast('Range', vm.minRange, vm.maxRange);
+        }
+
 	}
 })();
