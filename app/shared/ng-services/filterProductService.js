@@ -11,6 +11,13 @@ angular
 		vm.products;
 		vm.min;
 		vm.max;
+		vm.data = {
+			currentCategory: vm.currentCategory,
+			setCategory: 	 vm.setCategory
+		}
+		return{
+			data: vm.data
+		};
 
 		function setCategory(cat){
 			vm.currentCategory = cat;
@@ -20,5 +27,6 @@ angular
 			vm.min = min;
 			vm.max = max
 		}
+
 
 	}

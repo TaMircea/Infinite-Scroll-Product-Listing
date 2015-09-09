@@ -28,14 +28,17 @@ angular
 
         vm.LoadProduct();
 
-        $scope.$watch(
+        vm.cat = filterProductService.data.currentCategory;
+        console.log("here here"+vm.cat)
+
+/*        $scope.$watch(
             function(){ return filterProductService.currentCategory },
 
             function(newVal) {
                 vm.currentCategory = newVal;
                 vm.filterRefresh();              
            }
-        )
+        )*/
 
     /*  $scope.$on('categoryChanged', function(events, cat){
             vm.currentCategory = cat;
@@ -84,8 +87,8 @@ angular
 
         function sendFiltersData(prod, min ,max){
 
-            filterProductService.setFilterData(prod, min, max);
-            /*$rootScope.$broadcast('loadCats', prod, min, max);*/
+            /*filterProductService.setFilterData(prod, min, max);*/
+            $rootScope.$broadcast('loadCats', prod, min, max);
         }
 
         function extremePrice(products,type){

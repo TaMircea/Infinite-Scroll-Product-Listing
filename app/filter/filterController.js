@@ -49,21 +49,28 @@ angular
             vm.setMaxPrice();
         });
 
-        $scope.$watch(
-            function(){ return 
-                filterProductService.min;
+       /* $scope.$watch(
+            function(){ return {prod: filterProductService.products, 
+                                min:  filterProductService.min,
+                                max:  filterProductService.max
+                                };
              },
-            function(prod) {
-                console.log(prod)  
+            function(data) {
+                vm.products = data.prod;
+                vm.min = data.min;
+                vm.max = data.max;
+
+                vm.sendMinMaxRange();
+                vm.catFilter();  
       
            }
-        )
+        )*/
 
         function change (option){ 
                 vm.currentCategory=option;
                 console.log(vm.currentCategory);
                 $rootScope.$broadcast('categoryChanged', option);
-                filterProductService.setCategory(vm.currentCategory);
+                filterProductService.data.setCategory(vm.currentCategory);
         };
 
 
