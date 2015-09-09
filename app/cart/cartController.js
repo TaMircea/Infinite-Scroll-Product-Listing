@@ -19,7 +19,7 @@ angular
 
             vm.cartTotalCalc = cartTotalCalc;
             vm.cartTotal = 0;
-            vm.shoppingStarted = false;
+            vm.totalShown = false;
 
             vm.cartShown = false;
             vm.showCart = showCart;
@@ -37,7 +37,7 @@ angular
             }
            
             function addProduct(prod){
-                vm.shoppingStarted = true;
+                vm.totalShown = true;
                 vm.emptyCart = false;
                 vm.prod=prod;
                 if(vm.cartProducts.indexOf(vm.prod) == -1){
@@ -60,7 +60,7 @@ angular
                 vm.cartTotalCalc();
                 if(!vm.cartProducts[0]){
                     vm.emptyCart = true;
-                    vm.shoppingStarted = false;
+                    vm.totalShown = false;
                 }
             }
             function buyCart () {
@@ -68,7 +68,7 @@ angular
                 vm.cartProducts=[];
                 vm.playSound();
                 vm.cartTotal = 0;
-                vm.shoppingStarted = false;
+                vm.totalShown = false;
                 vm.emptyCart = true;
             }
 

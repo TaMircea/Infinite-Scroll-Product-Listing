@@ -13,7 +13,7 @@
 				<td><button ng-click="shop.removeProduct(cartProduct)">-</button></td>
 			</tr>
 		</table>	
-		<span ng-show="shop.shoppingStarted">Total: {{shop.cartTotal}}</span>
+		<span ng-show="shop.totalShown">Total: {{shop.cartTotal}}</span>
 		<button ng-click="shop.buyCart()">Checkout</button>
 	</div>
 </div>
