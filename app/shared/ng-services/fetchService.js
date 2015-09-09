@@ -12,7 +12,6 @@ angular
                 method: "get",
                 url: "data/products.php",
                 params: {
-                    action: "get",
                     limit: limit
                 }
             });

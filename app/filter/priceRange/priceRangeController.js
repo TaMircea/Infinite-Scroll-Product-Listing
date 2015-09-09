@@ -84,7 +84,6 @@ angular
             $rootScope.$broadcast('maxRangeChanged', vm.filterMaxRange);
 	   		};		
 	   	$scope.$on('Range',function(event, min, max){
-			console.log(min+" & "+max);
 			vm.minRange = min;
 			vm.maxRange = max;
 	   		});

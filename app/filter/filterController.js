@@ -4,8 +4,8 @@ angular
     .module('app')
     .controller('filterController', filterController);
 
-    filterController.$inject = ['$rootScope', '$scope']
-    function filterController($rootScope, $scope){
+    filterController.$inject = ['$rootScope', '$scope','filterProductService']
+    function filterController($rootScope, $scope, filterProductService){
     	var vm = this;
 
         vm.filtersShown = true;
@@ -49,10 +49,21 @@ angular
             vm.setMaxPrice();
         });
 
+        $scope.$watch(
+            function(){ return 
+                filterProductService.min;
+             },
+            function(prod) {
+                console.log(prod)  
+      
+           }
+        )
+
         function change (option){ 
                 vm.currentCategory=option;
                 console.log(vm.currentCategory);
                 $rootScope.$broadcast('categoryChanged', option);
+                filterProductService.setCategory(vm.currentCategory);
         };
 
 

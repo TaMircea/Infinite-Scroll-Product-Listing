@@ -4,9 +4,9 @@ angular
     .module('app')
     .controller('galleryController', galleryController);
 
-    galleryController.$inject = ['$rootScope', '$scope', 'productFetch','$q']
+    galleryController.$inject = ['$rootScope', '$scope', 'productFetch','$q','filterProductService']
 
-    function galleryController($rootScope, $scope, productFetch, $q){
+    function galleryController($rootScope, $scope, productFetch, $q, filterProductService){
     	var vm = this;
 
         vm.loading = false;
@@ -21,12 +21,23 @@ angular
         vm.sendProductInfo = sendProductInfo;
         vm.sendFiltersData = sendFiltersData;
 
+        vm.filterRefresh = filterRefresh;
+
         vm.min;vm.max;
         vm.extremePrice = extremePrice;
 
         vm.LoadProduct();
 
-        $scope.$on('categoryChanged', function(events, cat){
+        $scope.$watch(
+            function(){ return filterProductService.currentCategory },
+
+            function(newVal) {
+                vm.currentCategory = newVal;
+                vm.filterRefresh();              
+           }
+        )
+
+    /*  $scope.$on('categoryChanged', function(events, cat){
             vm.currentCategory = cat;
 
             var deferred = $q.defer();
@@ -36,17 +47,17 @@ angular
                 }, function error(msg) {
                   console.error(msg);
                 });
-            deferred.resolve(console.log('done'));
-
-            
-        });
+            deferred.resolve(something());
+ 
+        });*/
         $scope.$on('minPriceChanged', function(events, min){
             vm.filterMinPrice = min;
         });
         $scope.$on('maxPriceChanged', function(events, max){
             vm.filterMaxPrice = max;
         });
-        function something(){
+
+        function filterRefresh(){
             vm.extremePrice(vm.filteredProducts);
             vm.sendFiltersData(vm.filteredProducts, vm.min, vm.max);
             console.log(vm.filteredProducts);
@@ -70,9 +81,13 @@ angular
         function sendProductInfo(product){
             $rootScope.$broadcast('showProduct', product); 
         }
+
         function sendFiltersData(prod, min ,max){
-            $rootScope.$broadcast('loadCats', prod, min, max);
+
+            filterProductService.setFilterData(prod, min, max);
+            /*$rootScope.$broadcast('loadCats', prod, min, max);*/
         }
+
         function extremePrice(products,type){
             var max, min;
             var prices = [];
