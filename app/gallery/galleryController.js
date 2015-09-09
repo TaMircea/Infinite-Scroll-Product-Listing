@@ -31,6 +31,17 @@ angular
         vm.cat = filterProductService.data.currentCategory;
         console.log("here here"+vm.cat)
 
+
+        var getCurrent = function(){
+            filterProductService.data.getCategory()
+                .then(function(data) {
+                    console.log(data)
+                },
+                function(error) {
+                    console.log(":(")
+                });
+        }
+
 /*        $scope.$watch(
             function(){ return filterProductService.currentCategory },
 
@@ -40,19 +51,11 @@ angular
            }
         )*/
 
-    /*  $scope.$on('categoryChanged', function(events, cat){
+        $scope.$on('categoryChanged', function(events, cat){
             vm.currentCategory = cat;
-
-            var deferred = $q.defer();
-            var promise = deferred.promise;
-            promise.then(function success(data) {
-                  something();
-                }, function error(msg) {
-                  console.error(msg);
-                });
-            deferred.resolve(something());
+            /*vm.filterRefresh();*/
  
-        });*/
+        });
         $scope.$on('minPriceChanged', function(events, min){
             vm.filterMinPrice = min;
         });

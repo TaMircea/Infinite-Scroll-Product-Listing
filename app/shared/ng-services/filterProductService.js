@@ -7,18 +7,23 @@ angular
 
 		vm.currentCategory = "All";
 		vm.setCategory = setCategory;
+		vm.getCurrent = getCurrent;
 		vm.setFilterData = setFilterData;
 		vm.products;
 		vm.min;
 		vm.max;
 		vm.data = {
 			currentCategory: vm.currentCategory,
-			setCategory: 	 vm.setCategory
+			setCategory: 	 vm.setCategory,
+			getCategory:  	 vm.getCategory
 		}
 		return{
 			data: vm.data
 		};
 
+		function getCurrent(){
+			return vm.currentCategory;
+		}
 		function setCategory(cat){
 			vm.currentCategory = cat;
 		}

@@ -30,29 +30,28 @@ footer div{
 	overflow: scroll;
 }
 .side-content{
+	display: inline-block;
 	position: fixed;
 	top: 15%;
-	right: 0;
-	display: inline-block;
+	right: 1%;
 	max-width: 20%;
 }
-
+.filter,
+.cart{
+	padding: 1% 5% 1% 1%;
+}
 .filter{
 	display: block;
-	padding: 1%;
 	position: relative;
 	border-radius: 5px;
 	border:1px solid black;
 }
-
 .filter_icon{
 	display: block;
 	padding: 0;
 	border-radius: 5px;
 	border:1px solid black;
 }
-
-
 .filter_icon:hover{
 	background: salmon;
 	transition: all 0.5s;
@@ -60,17 +59,15 @@ footer div{
 }
 .cart{
 	position: relative;
-}
-.cart,
-.cart_icon{
 	display: block;
-	padding: 1%;
-
 	border-radius: 5px;
 	border:1px solid black;
 }
 .cart_icon{
+	display: block;
 	padding: 0;
+	border-radius: 5px;
+	border:1px solid black;
 }
 .cart_icon:hover{
 	background: salmon;
@@ -236,4 +233,8 @@ footer div{
     float: right;
 }
 
+.ranger_value{
+	display: inline-block;
+	width: 40%;
+}
 
