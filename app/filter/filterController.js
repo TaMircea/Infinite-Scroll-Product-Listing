@@ -69,8 +69,7 @@ angular
         function change (option){ 
                 vm.currentCategory=option;
                 console.log(vm.currentCategory);
-                $rootScope.$broadcast('categoryChanged', option);
-                filterProductService.data.setCategory(vm.currentCategory);
+                filterProductService.setCategory(vm.currentCategory);
         };
 
 

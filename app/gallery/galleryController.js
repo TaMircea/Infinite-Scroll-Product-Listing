@@ -28,40 +28,22 @@ angular
 
         vm.LoadProduct();
 
-        vm.cat = filterProductService.data.currentCategory;
-        console.log("here here"+vm.cat)
-
-
-        var getCurrent = function(){
-            filterProductService.data.getCategory()
-                .then(function(data) {
-                    console.log(data)
-                },
-                function(error) {
-                    console.log(":(")
-                });
-        }
-
-/*        $scope.$watch(
-            function(){ return filterProductService.currentCategory },
-
-            function(newVal) {
-                vm.currentCategory = newVal;
-                vm.filterRefresh();              
-           }
-        )*/
-
-        $scope.$on('categoryChanged', function(events, cat){
-            vm.currentCategory = cat;
-            /*vm.filterRefresh();*/
- 
+        $scope.$watch(
+            function getValue(){
+            console.log('function watched');
+            return (filterProductService.currentCategory);
+            },
+            function collChanged(newValue, oldvalue){
+                vm.currentCategory = newValue;
         });
+
         $scope.$on('minPriceChanged', function(events, min){
             vm.filterMinPrice = min;
         });
         $scope.$on('maxPriceChanged', function(events, max){
             vm.filterMaxPrice = max;
         });
+       
 
         function filterRefresh(){
             vm.extremePrice(vm.filteredProducts);

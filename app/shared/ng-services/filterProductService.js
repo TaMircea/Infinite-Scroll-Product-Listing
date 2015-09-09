@@ -12,14 +12,7 @@ angular
 		vm.products;
 		vm.min;
 		vm.max;
-		vm.data = {
-			currentCategory: vm.currentCategory,
-			setCategory: 	 vm.setCategory,
-			getCategory:  	 vm.getCategory
-		}
-		return{
-			data: vm.data
-		};
+		
 
 		function getCurrent(){
 			return vm.currentCategory;

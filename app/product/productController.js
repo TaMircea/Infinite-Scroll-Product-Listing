@@ -12,7 +12,10 @@ angular
 
     	$scope.$on('showProduct', function(events, args){
             vm.selectedProduct = args;
-            console.log(vm.selectedProduct)
+            console.log(vm.selectedProduct);
+
         });
+
+
     }
 })();
