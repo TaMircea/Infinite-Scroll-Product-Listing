@@ -17,7 +17,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 if ($conn->query($newOrder) === TRUE) {
 
-    echo "New order successfully";
+    echo "POST SUCCESSFUL \r\n";
 
     $currOrder = mysqli_insert_id($conn);
 
@@ -28,12 +28,14 @@ if ($conn->query($newOrder) === TRUE) {
 
 	    $newOrderLine = "INSERT INTO Orders ( id, productId, quantity) VALUES ('$currOrder','$id','$qInCart')";
 	    if ($conn->query($newOrderLine) === TRUE) {
-	    	echo "New line inserted";
+	    	
 	    }
 	    else{
 	    	echo "Error: " . $newOrderLine . "<br>" . $conn->error;
 	    }
+
 	}
+	echo json_encode($data);
 
 } 
 else {
