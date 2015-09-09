@@ -1,17 +1,64 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Store</title>
 	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="Style/normalize.css">
-	<link rel="stylesheet" type="text/css" href="Style/style.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
 
- 	<script src="Scripts/app.js"></script>
+ 	<script src="app/app.js"></script>
+ 	<script src="app/gallery/scrollerDirective.js"></script>
+ 
+ 	<script src="app/shared/ng-services/fetchService.js"></script>
+ 	<script src="app/shared/ng-services/storeService.js"></script>
+ 	<script src="app/shared/ng-services/filterProductService.js"></script>
+ 	
+ 	
+ 	<script src="app/gallery/galleryDirective.js"></script>	
+ 	<script src="app/gallery/galleryController.js"></script>
+ 	
+ 	<script src="app/filter/filterDirective.js"></script>
+ 	<script src="app/filter/filterController.js"></script>
+
+	<script src="app/filter/priceRange/priceRangeDirective.js"></script>
+	<script src="app/filter/priceRange/priceRangeController.js"></script> 	
+
+ 	<script src="app/cart/cartController.js"></script>
+ 	<script src="app/cart/cartDirective.js"></script>
+
+ 	<script src="app/product/productController.js"></script>
+
+ 	<script src="app/shared/ng-filters/productFilter.js"></script>
+	<script src="app/route-config.js"></script>
+
+
+ 	
 </head>
+
 <body>
+	<header>
+		<nav>
+			<div>Home</div>
+			<div>Shop</div>
+			<div>About</div>
+			<div>Contact</div>
+		</nav>
+	</header>
+
+	<div class="shop" ng-app="app">
+		<my-gallery-directive></my-gallery-directive>
+		<div class="side-content">
+			<my-filter-directive></my-filter-directive>
+			<my-cart-directive></my-cart-directive>
+		</div>
+	</div>
+		
+	<footer>
+		<div>Copyright @ 2015</div>
+	</footer>
 
 </body>
 </html>

@@ -1,0 +1,19 @@
+<div ng-controller="cartController as shop">	
+	<div class="cart_icon" ng-click="shop.showCart()" ng-hide="shop.cartShown">
+		<img src="assets/img/shoping_cart.png">
+	</div>
+	<div class="cart" ng-show="shop.cartShown" >
+		<div class="closeBtn" ng-click="shop.hideCart()">X</div>
+		<h4>Cart</h4>
+		<table class="productList">
+			<tr ng-repeat="cartProduct in shop.cartProducts">
+				<span ng-show="shop.emptyCart" >No item in cart :(</span>
+				<td>{{ cartProduct.name }}</td>
+				<td>{{ cartProduct.qInCart }}</td>
+				<td><button ng-click="shop.removeProduct(cartProduct)">-</button></td>
+			</tr>
+		</table>	
+		<span ng-show="shop.totalShown">Total: {{shop.cartTotal}}</span>
+		<button ng-click="shop.buyCart()">Checkout</button>
+	</div>
+</div>
