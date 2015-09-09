@@ -30,38 +30,42 @@ footer div{
 	overflow: scroll;
 }
 .side-content{
+	position: fixed;
+	top: 15%;
+	right: 0;
 	display: inline-block;
 	max-width: 20%;
 }
+
 .filter{
+	display: block;
 	padding: 1%;
-	position: fixed;
-	right: 1%;
-	top: 15%;
+	position: relative;
 	border-radius: 5px;
 	border:1px solid black;
 }
 
 .filter_icon{
+	display: block;
 	padding: 0;
 	border-radius: 5px;
 	border:1px solid black;
-
-	position: fixed;
-	right: 1%;
-	top: 15%;
 }
+
+
 .filter_icon:hover{
 	background: salmon;
 	transition: all 0.5s;
 	cursor: pointer;
 }
+.cart{
+	position: relative;
+}
 .cart,
 .cart_icon{
+	display: block;
 	padding: 1%;
-	position: fixed;
-	right: 1%;
-	top: 50%;
+
 	border-radius: 5px;
 	border:1px solid black;
 }
