@@ -33,7 +33,7 @@ angular
             console.log('function watched');
             return (filterProductService.currentCategory);
             },
-            function collChanged(newValue, oldvalue){
+            function catChanged(newValue, oldvalue){
                 vm.currentCategory = newValue;
         });
 

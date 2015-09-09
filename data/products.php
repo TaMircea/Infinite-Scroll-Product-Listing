@@ -32,4 +32,3 @@ $result = mysql_query(" SELECT Id, name, price, picture FROM Products LIMIT $lim
 	echo json_encode($jsonData, true);
 
 mysql_close($dbhandle);
-?> 

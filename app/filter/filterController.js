@@ -48,6 +48,8 @@ angular
             vm.maxRange = max;
             vm.setMaxPrice();
         });
+        vm.category = vm.categories[0];
+        
 
        /* $scope.$watch(
             function(){ return {prod: filterProductService.products, 

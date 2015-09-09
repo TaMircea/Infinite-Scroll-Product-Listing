@@ -82,7 +82,8 @@ angular
 	        };
 	    function setMaxPrice(){
             $rootScope.$broadcast('maxRangeChanged', vm.filterMaxRange);
-	   		};		
+	   		};	
+	   			
 	   	$scope.$on('Range',function(event, min, max){
 			vm.minRange = min;
 			vm.maxRange = max;

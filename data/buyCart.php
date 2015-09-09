@@ -47,4 +47,3 @@ test sql
 SELECT name, price, quantity, (price*quantity) as total from Products INNER JOIN Orders on Products.Id = Orders.productId where name = "Berk" UNION ALL SELECT 'TOTAL', '', '', Sum(price*quantity) from Products INNER JOIN Orders on Products.Id = Orders.productId where name = "Berk" GROUP BY 1
 */
 
-?> 
