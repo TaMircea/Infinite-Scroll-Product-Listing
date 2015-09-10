@@ -1,10 +1,8 @@
 (function() {
     'use strict';
-
 angular
     .module('app')
     .filter('productFilter', productFilter);
-
         function productFilter(){
             return function(products, options) {
                 var filteredProducts = [];
@@ -12,7 +10,6 @@ angular
                 var category = options.category;
                 var price_min = options.min;
             	var price_max = options.max;
-
                 angular.forEach(products, function(product) {
                 	if(product.price >= price_min && product.price<=price_max){
 
@@ -27,5 +24,4 @@ angular
                 return filteredProducts;
             }
         };
-
 })();

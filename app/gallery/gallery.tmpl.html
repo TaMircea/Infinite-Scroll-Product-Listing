@@ -1,6 +1,6 @@
 <div class="gallery" when-scrolled="shop.LoadProduct()">
 	<div ng-view></div>
-		<div class="item" ng-repeat="product in shop.filteredProducts = (shop.products | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice} )"  >
+		<div class="item animate-repeat" ng-repeat="product in shop.filteredProducts = (shop.products | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice} )"  >
 			<img ng-src="{{product.picture}}">
 			<ul class="item_info">
 				<a ng-click="shop.sendProductInfo(product)" href="#Products/{{product.name}}" >See info</a>

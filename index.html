@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 
 <head>
 	<title>Store</title>
 	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+ 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
+
 
  	<script src="app/app.js"></script>
  	<script src="app/gallery/scrollerDirective.js"></script>
@@ -46,7 +49,7 @@
 		</nav>
 	</header>
 
-	<div class="shop" ng-app="app">
+	<div class="shop" >
 		<my-gallery-directive></my-gallery-directive>
 		<div class="side-content">
 			<my-filter-directive></my-filter-directive>
