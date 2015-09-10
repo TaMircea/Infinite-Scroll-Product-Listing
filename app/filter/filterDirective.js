@@ -20,20 +20,18 @@ angular
 		return directive;
 	};
 
-	 filterController.$inject = ['$rootScope', '$scope','filterProductService']
-    function filterController($rootScope, $scope, filterProductService){
+	 filterController.$inject = ['filterProductService', 'filterRangeService']
+    function filterController(filterProductService, filterRangeService){
     	var vm = this;
 
         vm.filtersShown = true;
         vm.showFilters = showFilters;
         vm.hideFilters = hideFilters;
 
-
-
         vm.filterMinPrice = 0;
         vm.filterMaxPrice = 100;
-        vm.setMinPrice = setMinPrice;
-        vm.setMaxPrice = setMaxPrice;
+        vm.setMinMaxPrice = setMinMaxPrice;
+
 
         vm.minRange;
         vm.maxRange;
@@ -47,50 +45,30 @@ angular
         vm.currentCategory = "All";
         vm.sendMinMaxRange = sendMinMaxRange
 
-         $scope.$on('loadCats', function(events, products, min, max){
-            vm.products = products;
-            vm.minRange = min;
-            vm.maxRange = max;
+        filterProductService.filterDataSent().then(null, null, function(data){
+            vm.products = data.products;
+            vm.minRange = data.min;
+            vm.maxRange = data.max;
             vm.sendMinMaxRange();
-
             vm.catFilter();
         });
-
-        $scope.$on('minRangeChanged', function(events, min){
+        filterRangeService.minRangeSent().then(null, null, function(min){
             vm.minRange = min;
-            vm.setMinPrice();
+            vm.setMinMaxPrice('Min');
         });
-        $scope.$on('maxRangeChanged', function(events, max){
+
+        filterRangeService.maxRangeSent().then(null, null, function(max){
             vm.maxRange = max;
-            vm.setMaxPrice();
+            vm.setMinMaxPrice('Max');
         });
         vm.category = vm.categories[0];
-        
-
-       /* $scope.$watch(
-            function(){ return {prod: filterProductService.products, 
-                                min:  filterProductService.min,
-                                max:  filterProductService.max
-                                };
-             },
-            function(data) {
-                vm.products = data.prod;
-                vm.min = data.min;
-                vm.max = data.max;
-
-                vm.sendMinMaxRange();
-                vm.catFilter();  
-      
-           }
-        )*/
 
         function change (option){ 
                 vm.currentCategory=option;
                 console.log(vm.currentCategory);
-                filterProductService.setCategory(vm.currentCategory);
+                filterProductService.changeCategory(option);
+
         };
-
-
         function catFilter(){
                 angular.forEach(vm.products, function(product){
                     var cat = product.categoriesRaw;
@@ -103,12 +81,15 @@ angular
             });
         }
 
-        function setMinPrice(){
-            $rootScope.$broadcast('minPriceChanged', vm.minRange);
+        function setMinMaxPrice(MinOrMax){
+            if(MinOrMax == 'Min'){
+                filterProductService.sendMinPrice(vm.minRange);
+            }
+            if(MinOrMax == 'Max'){
+                filterProductService.sendMaxPrice(vm.maxRange);
+            }
         };
-        function setMaxPrice(){
-            $rootScope.$broadcast('maxPriceChanged', vm.maxRange);
-        };
+
         function showFilters(){
             vm.filtersShown = true;
         }
@@ -116,7 +97,11 @@ angular
             vm.filtersShown = false;
         }
         function sendMinMaxRange(){
-            $rootScope.$broadcast('Range', vm.minRange, vm.maxRange);
+            var data = {
+                min: vm.minRange,
+                max: vm.maxRange
+            }
+            filterRangeService.sendMinMaxRange(data);
         }
 
 	}

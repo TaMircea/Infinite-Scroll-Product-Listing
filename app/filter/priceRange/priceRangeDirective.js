@@ -19,9 +19,8 @@ angular
 		return directive;
 	};
 
-    priceRangeController.$inject = ['$rootScope', '$scope']
-
-    function priceRangeController($rootScope, $scope){
+    priceRangeController.$inject = ['filterRangeService']
+    function priceRangeController(filterRangeService){
 
     	var vm = this;
 
@@ -31,8 +30,7 @@ angular
 		vm.filterMinRange = vm.minRange;
 		vm.filterMaxRange = vm.maxRange;
 
-    	vm.setMaxPrice = setMaxPrice;
-    	vm.setMinPrice = setMinPrice;
+    	vm.setMinMaxRange = setMinMaxRange;
 
 
     	function getDomElement(element) {
@@ -62,8 +60,7 @@ angular
 					if (range >= vm.minRange && range < vm.filterMaxRange) {
 						rangeLeft.style.width = positionPercent+'%';
 						vm.filterMinRange = range;
-						vm.setMinPrice();
-						$scope.$apply();
+						vm.setMinMaxRange('Min');
 					}
 				}
 				if (spin == 'right' && newPosRightSpin <= 100) {
@@ -71,8 +68,7 @@ angular
 						if(range > vm.filterMinRange){
 						rangeRight.style.width = newPosRightSpin+'%';
 						vm.filterMaxRange = range;
-						vm.setMaxPrice();
-						$scope.$apply();
+						vm.setMinMaxRange('Max');
 					}
 				}
 			}
@@ -92,16 +88,19 @@ angular
 			positions('right');
 		};
 
-		function setMinPrice(){
-	        $rootScope.$broadcast('minRangeChanged', vm.filterMinRange);
-	        };
-	    function setMaxPrice(){
-            $rootScope.$broadcast('maxRangeChanged', vm.filterMaxRange);
-	   		};	
-	   			
-	   	$scope.$on('Range',function(event, min, max){
-			vm.minRange = min;
-			vm.maxRange = max;
-	   		});
+		function setMinMaxRange(MinOrMax){
+            if(MinOrMax == 'Min'){
+                filterRangeService.sendMinRange(vm.filterMinRange);
+            }
+            if(MinOrMax == 'Max'){
+                filterRangeService.sendMaxRange(vm.filterMaxRange);
+            }
+        };
+
+	   	filterRangeService.minMaxRangeSent().then(null, null, function(data){
+	   		vm.minRange = data.min;
+			vm.maxRange = data.max;
+
+        });
     }
 })();

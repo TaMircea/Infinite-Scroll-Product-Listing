@@ -4,17 +4,16 @@ angular
     .module('app')
     .controller('productController', productController);
 
-    productController.$inject = ['$rootScope', '$scope']
+    productController.$inject = ['galleryProductService']
 
-    function productController($rootScope, $scope){
+    function productController(galleryProductService){
     	var vm = this;
     	vm.selectedProduct;
 
-    	$scope.$on('showProduct', function(events, args){
-            vm.selectedProduct = args;
+        galleryProductService.infoSent().then(null, null, function(info){
+            vm.selectedProduct = info;
             console.log(vm.selectedProduct);
-
-        });
+        })
 
 
     }

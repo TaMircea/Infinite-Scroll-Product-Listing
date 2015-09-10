@@ -24,8 +24,8 @@ angular
 	};
 
 
-    cartController.$inject = ['$rootScope', '$scope', 'storeService']
-    function cartController($rootScope, $scope, storeService){
+    cartController.$inject = ['storeService', 'cartGalleryService']
+    function cartController(storeService, cartGalleryService){
 			var vm = this;   	
             vm.playSound = playSound;
             vm.audio = new Audio('assets/sounds/Ka-Ching.wav');
@@ -48,9 +48,10 @@ angular
 
             //////////////
             
-            $scope.$on('addToCart', function(events, args){
-                vm.addProduct(args);
-            });
+            cartGalleryService.productSent().then(null, null, function(product){
+                vm.addProduct(product);
+            })
+            
 
             function playSound (){
                 vm.audio.play();

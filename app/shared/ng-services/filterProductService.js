@@ -2,29 +2,49 @@ angular
 	.module('app')
 	.service('filterProductService', filterProductService);
 
-	function filterProductService(){
+	function filterProductService($q){
 		var vm = this;
 
-		vm.currentCategory = "All";
-		vm.setCategory = setCategory;
-		vm.getCurrent = getCurrent;
-		vm.setFilterData = setFilterData;
-		vm.products;
-		vm.min;
-		vm.max;
-		
+		vm.notificationDefer = $q.defer();
+		vm.categoryChanged = categoryChanged;
+		vm.changeCategory = changeCategory;
+		function categoryChanged() {
+			return vm.notificationDefer.promise;
+		}
+		function changeCategory (valueToPass){
+			vm.notificationDefer.notify(valueToPass);
+		}
 
-		function getCurrent(){
-			return vm.currentCategory;
+		vm.dataDefer = $q.defer();
+		vm.filterDataSent = filterDataSent;
+		vm.sendFilterData = sendFilterData;
+		function filterDataSent() {
+			return vm.dataDefer.promise;
 		}
-		function setCategory(cat){
-			vm.currentCategory = cat;
+		function sendFilterData(data) {
+			vm.dataDefer.notify(data)
 		}
-		function setFilterData(products, min, max){
-			vm.products = products;
-			vm.min = min;
-			vm.max = max
+
+		vm.minDefer = $q.defer();
+		vm.minPriceSent = minPriceSent;
+		vm.sendMinPrice = sendMinPrice;
+		function minPriceSent() {
+			return vm.minDefer.promise;
 		}
+		function sendMinPrice(min) {
+			vm.minDefer.notify(min)
+		}
+
+		vm.maxDefer = $q.defer();
+		vm.maxPriceSent = maxPriceSent;
+		vm.sendMaxPrice = sendMaxPrice;
+		function maxPriceSent() {
+			return vm.maxDefer.promise;
+		}
+		function sendMaxPrice(max) {
+			vm.maxDefer.notify(max)
+		}
+		
 
 
 	}

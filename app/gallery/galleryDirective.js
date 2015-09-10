@@ -22,9 +22,9 @@ angular
 		return directive;
 	};
 
-	 galleryController.$inject = ['$rootScope', '$scope', 'productFetch','$q','filterProductService']
+	 galleryController.$inject = ['productFetch','$q','filterProductService', 'cartGalleryService', 'galleryProductService']
 
-    function galleryController($rootScope, $scope, productFetch, $q, filterProductService){
+    function galleryController(productFetch, $q, filterProductService, cartGalleryService, galleryProductService){
     	var vm = this;
 
         vm.loading = false;
@@ -46,22 +46,15 @@ angular
 
         vm.LoadProduct();
 
-        $scope.$watch(
-            function getValue(){
-            console.log('function watched');
-            return (filterProductService.currentCategory);
-            },
-            function catChanged(newValue, oldvalue){
-                vm.currentCategory = newValue;
-        });
-
-        $scope.$on('minPriceChanged', function(events, min){
+        filterProductService.categoryChanged().then(null, null, function(value){
+            vm.currentCategory = value;
+        })
+        filterProductService.minPriceSent().then(null, null, function(min){
             vm.filterMinPrice = min;
-        });
-        $scope.$on('maxPriceChanged', function(events, max){
+        })
+        filterProductService.maxPriceSent().then(null, null, function(max){
             vm.filterMaxPrice = max;
-        });
-       
+        })
 
         function filterRefresh(){
             vm.extremePrice(vm.filteredProducts);
@@ -82,16 +75,19 @@ angular
                 });
         }
         function sendProductToCart(product){
-            $rootScope.$broadcast('addToCart', product);   
+            cartGalleryService.sendProduct(product);   
         }
         function sendProductInfo(product){
-            $rootScope.$broadcast('showProduct', product); 
+            galleryProductService.sendInfo(product);
         }
 
         function sendFiltersData(prod, min ,max){
-
-            /*filterProductService.setFilterData(prod, min, max);*/
-            $rootScope.$broadcast('loadCats', prod, min, max);
+            var data = {
+                products: prod,
+                min: min,
+                max: max
+            };
+            filterProductService.sendFilterData(data);
         }
 
         function extremePrice(products,type){
