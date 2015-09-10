@@ -10,9 +10,9 @@ $dbhandle = mysql_connect($hostname, $username, $password)
 $selected = mysql_select_db("Shop",$dbhandle) 
   or die("Could not select shop");
 
-$limit = $_GET["limit"];
+$start = $_GET["start"];
 
-$result = mysql_query(" SELECT Id, name, price, picture FROM Products LIMIT $limit, 20 ");
+$result = mysql_query(" SELECT Id, name, price, picture FROM Products LIMIT $start, 20 ");
     
 
 	$jsonData = array();

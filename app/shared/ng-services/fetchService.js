@@ -7,12 +7,12 @@ angular
                     getProducts: getProducts
               });
 
-		function getProducts(limit) {
+		function getProducts(start) {
         	var request = $http({
                 method: "get",
                 url: "data/products.php",
                 params: {
-                    limit: limit
+                    start: start
                 }
             });
             return( request.then( handleSuccess, handleError ) );

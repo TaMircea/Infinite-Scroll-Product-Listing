@@ -31,7 +31,7 @@ angular
     	vm.products = [];
         vm.LoadProduct=LoadProduct;
         vm.sendProductToCart = sendProductToCart;
-      	vm.limit=0;
+      	vm.start=0;
         vm.currentCategory = "All";
 
         vm.filterMinPrice = 0;
@@ -72,13 +72,13 @@ angular
 
       	function LoadProduct(){
                 vm.loading = true;
-                 productFetch.getProducts(vm.limit).then(function(products){
+                 productFetch.getProducts(vm.start).then(function(products){
                     vm.products.push.apply(vm.products, products);
                     var min = vm.extremePrice(vm.products, 'min');
                     var max = vm.extremePrice(vm.products, 'max');
                     vm.sendFiltersData(products, min, max);
                     vm.loading = false;   
-                    vm.limit += 20;                 
+                    vm.start += 20;                 
                 });
         }
         function sendProductToCart(product){
