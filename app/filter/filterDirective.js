@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 angular
-	.module('app')
+	.module('MyFilter',['MyRange'])
 	.directive('myFilterDirective', filterDirective);
 	function filterDirective(){
 		var directive = {
