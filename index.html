@@ -1,42 +1,33 @@
 <!DOCTYPE html>
-<html>
-
+<html ng-app="app">
 <head>
 	<title>Store</title>
 	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
  	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+ 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
 
  	<script src="app/app.js"></script>
  	<script src="app/gallery/scrollerDirective.js"></script>
+ 	<script src="app/gallery/galleryDirective.js"></script>	
+ 	<script src="app/filter/filterDirective.js"></script>
+ 	<script src="app/cart/cartDirective.js"></script>
+ 	<script src="app/filter/priceRange/priceRangeDirective.js"></script>
  
  	<script src="app/shared/ng-services/fetchService.js"></script>
  	<script src="app/shared/ng-services/storeService.js"></script>
  	<script src="app/shared/ng-services/filterProductService.js"></script>
- 	
- 	
- 	<script src="app/gallery/galleryDirective.js"></script>	
-
- 	<script src="app/filter/filterDirective.js"></script>
-
-
-	<script src="app/filter/priceRange/priceRangeDirective.js"></script>
-	<script src="app/filter/priceRange/priceRangeController.js"></script> 	
-
-
- 	<script src="app/cart/cartDirective.js"></script>
+ 	<script src="app/shared/ng-services/cartGalleryService.js"></script>
+ 	<script src="app/shared/ng-services/filterRangeService.js"></script>
+ 	<script src="app/shared/ng-services/galleryProductService.js"></script> 	
 
  	<script src="app/product/productController.js"></script>
-
  	<script src="app/shared/ng-filters/productFilter.js"></script>
 	<script src="app/route-config.js"></script>
-
-
- 	
 </head>
-
 <body>
 	<header>
 		<nav>
@@ -46,18 +37,15 @@
 			<div>Contact</div>
 		</nav>
 	</header>
-
-	<div class="shop" ng-app="app">
+	<div class="shop" >
 		<my-gallery-directive></my-gallery-directive>
 		<div class="side-content">
 			<my-filter-directive></my-filter-directive>
 			<my-cart-directive></my-cart-directive>
 		</div>
-	</div>
-		
+	</div>	
 	<footer>
 		<div>Copyright @ 2015</div>
 	</footer>
-
 </body>
 </html>

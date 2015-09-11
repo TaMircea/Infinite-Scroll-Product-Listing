@@ -3,97 +3,74 @@
 angular
 	.module('app')
 	.directive('myGalleryDirective', galleryDirective);
-
-
 	function galleryDirective(){
-
 		var directive = {
 			restrict: 'E',
 			templateUrl: 'app/gallery/gallery.tmpl.html',
-			scope: {
-				gallery: '@'
-			},
+			scope: {},
 			controller: galleryController,
 			controllerAs: 'shop',
-			bindToController: true
-			
-
+			bindToController: true	
 		};
 		return directive;
 	};
-
-	 galleryController.$inject = ['$rootScope', '$scope', 'productFetch','$q','filterProductService']
-
-    function galleryController($rootScope, $scope, productFetch, $q, filterProductService){
+	galleryController.$inject = ['productFetch','$q','filterProductService', 'cartGalleryService', 'galleryProductService']
+    function galleryController(productFetch, $q, filterProductService, cartGalleryService, galleryProductService){
     	var vm = this;
-
         vm.loading = false;
     	vm.products = [];
         vm.LoadProduct=LoadProduct;
         vm.sendProductToCart = sendProductToCart;
-      	vm.limit=0;
+      	vm.start=0;
         vm.currentCategory = "All";
-
         vm.filterMinPrice = 0;
         vm.filterMaxPrice = 100;
         vm.sendProductInfo = sendProductInfo;
         vm.sendFiltersData = sendFiltersData;
-
         vm.filterRefresh = filterRefresh;
-
         vm.min;vm.max;
         vm.extremePrice = extremePrice;
-
         vm.LoadProduct();
-
-        $scope.$watch(
-            function getValue(){
-            console.log('function watched');
-            return (filterProductService.currentCategory);
-            },
-            function catChanged(newValue, oldvalue){
-                vm.currentCategory = newValue;
-        });
-
-        $scope.$on('minPriceChanged', function(events, min){
+        filterProductService.categoryChanged().then(null, null, function(value){
+            vm.currentCategory = value;
+        })
+        filterProductService.minPriceSent().then(null, null, function(min){
             vm.filterMinPrice = min;
-        });
-        $scope.$on('maxPriceChanged', function(events, max){
+        })
+        filterProductService.maxPriceSent().then(null, null, function(max){
             vm.filterMaxPrice = max;
-        });
-       
-
+        })
         function filterRefresh(){
             vm.extremePrice(vm.filteredProducts);
             vm.sendFiltersData(vm.filteredProducts, vm.min, vm.max);
             console.log(vm.filteredProducts);
             console.log(vm.min + ' '+ vm.max)
         };
-
       	function LoadProduct(){
                 vm.loading = true;
-                 productFetch.getProducts(vm.limit).then(function(products){
+                 productFetch.getProducts(vm.start).then(function(products){
                     vm.products.push.apply(vm.products, products);
                     var min = vm.extremePrice(vm.products, 'min');
                     var max = vm.extremePrice(vm.products, 'max');
                     vm.sendFiltersData(products, min, max);
                     vm.loading = false;   
-                    vm.limit += 20;                 
+                    vm.start += 20;                 
                 });
         }
         function sendProductToCart(product){
-            $rootScope.$broadcast('addToCart', product);   
+            cartGalleryService.sendProduct(product);   
         }
         function sendProductInfo(product){
-            $rootScope.$broadcast('showProduct', product); 
+            galleryProductService.sendInfo(product);
         }
-
         function sendFiltersData(prod, min ,max){
-
-            /*filterProductService.setFilterData(prod, min, max);*/
-            $rootScope.$broadcast('loadCats', prod, min, max);
+            var data = {
+                products: prod,
+                min: min,
+                max: max
+            };
+            filterProductService.sendFilterData(data);
         }
-
         function extremePrice(products,type){
             var max, min;
             var prices = [];
@@ -114,7 +91,6 @@ angular
                 vm.max = max;
                 vm.min = min;
             }
-
         }
     }
 })();

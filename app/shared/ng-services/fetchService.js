@@ -1,23 +1,20 @@
 angular
 	.module('app')
 	.service('productFetch', productFetch);
-
 	function productFetch($http, $q){
 		return({
                     getProducts: getProducts
               });
-
-		function getProducts(limit) {
+		function getProducts(start) {
         	var request = $http({
                 method: "get",
                 url: "data/products.php",
                 params: {
-                    limit: limit
+                    start: start
                 }
             });
             return( request.then( handleSuccess, handleError ) );
         }
-
         function handleError( response ) {
                     if (
                         ! angular.isObject( response.data ) ||
@@ -30,7 +27,4 @@ angular
         function handleSuccess( response ) {
                     return( response.data ); 
         }
-        
-
-
 	}
