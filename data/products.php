@@ -2,19 +2,12 @@
 $username = "root";
 $password = "root";
 $hostname = "localhost"; 
-
-
 $dbhandle = mysql_connect($hostname, $username, $password) 
  or die("Unable to connect to MySQL");
-
 $selected = mysql_select_db("Shop",$dbhandle) 
   or die("Could not select shop");
-
 $start = $_GET["start"];
-
 $result = mysql_query(" SELECT Id, name, price, picture FROM Products LIMIT $start, 20 ");
-    
-
 	$jsonData = array();
 	while ($res = mysql_fetch_object($result)) {
         $curr = $res->Id;    	
@@ -30,5 +23,4 @@ $result = mysql_query(" SELECT Id, name, price, picture FROM Products LIMIT $sta
     	$jsonData[] = $res;
 	}
 	echo json_encode($jsonData, true);
-
 mysql_close($dbhandle);

@@ -3,34 +3,26 @@
 angular
 	.module('app')
 	.directive('myPriceRangeDirective', myPriceRangeDirective);
-
 	function myPriceRangeDirective(){
-
 		var directive = {
 			restrict: 'E',
 			templateUrl: 'app/filter/priceRange/priceRange.tmpl.html',
-			scope: {
-				range: '='
-			},
+			scope: {},
 			controller: priceRangeController,
 			controllerAs: 'range',
 			bindToController: true
 		};
 		return directive;
 	};
-
-    priceRangeController.$inject = ['filterRangeService']
+   	priceRangeController.$inject = ['filterRangeService']
     function priceRangeController(filterRangeService){
-
     	var vm = this;
     	vm.minRange = 0;
 		vm.maxRange = 100;
 		vm.filterMinRange = vm.minRange;
 		vm.filterMaxRange = vm.maxRange;
     	vm.setMinMaxRange = setMinMaxRange;
-
     	vm.getDomElement = getDomElement;
-
     	function getDomElement(element) {
 			return document.querySelector(element);
 		};

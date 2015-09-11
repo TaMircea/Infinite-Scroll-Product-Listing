@@ -1,6 +1,5 @@
 (function() {
     'use strict';
-
 angular
 	.module('app')
 	.directive('whenScrolled', whenScrolled);
@@ -15,5 +14,4 @@ angular
 		        });
 		    };
 		};
-
 })();

@@ -1,11 +1,11 @@
-	<div class="filter_icon" ng-click="shop.showFilters()" ng-hide="shop.filtersShown">
-		<img src="assets/img/filter-icon.png">		
-	</div>
-	<div  class="filter animate-shhi" ng-show="shop.filtersShown">
-		<div class="closeBtn" ng-click="shop.hideFilters()">X</div>
-		<h4>Filter</h4>
-		<label>Category</label>
-		<select name="Categories" ng-model="shop.category" ng-change="shop.change(shop.category)" ng-options="category for category in shop.categories">
-		</select> <br>
-		<my-price-range-directive></my-price-range-directive>
-	</div>
+<div class="filter_icon" ng-click="shop.showFilters()" ng-hide="shop.filtersShown">
+	<img src="assets/img/filter-icon.png">		
+</div>
+<div class="filter animate-shhi" ng-show="shop.filtersShown">
+	<div class="closeBtn" ng-click="shop.hideFilters()">X</div>
+	<h4>Filter</h4>
+	<label>Category</label>
+	<select name="Categories" ng-model="shop.category" ng-change="shop.change(shop.category)" ng-options="category for category in shop.categories">
+	</select> <br>
+	<my-price-range-directive></my-price-range-directive>
+</div>

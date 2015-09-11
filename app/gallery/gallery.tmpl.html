@@ -1,18 +1,18 @@
 <div class="gallery" when-scrolled="shop.LoadProduct()">
 	<div ng-view></div>
-		<div class="item animate-repeat" ng-repeat="product in shop.filteredProducts = (shop.products | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice} )"  >
-			<img ng-src="{{product.picture}}">
-			<ul class="item_info">
-				<a ng-click="shop.sendProductInfo(product)" href="#Products/{{product.name}}" >See info</a>
-				<li>{{product.name}}</li>
-				<li>{{product.price | currency:"$"}}</li>
-				<li><button ng-click="shop.sendProductToCart(product)">Add to cart</button></li>
-			</ul>
-			<div class="item_cats">
-				<div ng-repeat="c in product.categoriesRaw track by $index">{{c}}</div>
-			</div>
-		</div>
-		<div class ="inactive" id="loader" ng-class="{active: shop.loading}">
-			<img src="assets/gifs/loader.gif">
+	<div class="item animate-repeat" ng-repeat="product in shop.filteredProducts = (shop.products | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice} )"  >
+		<img ng-src="{{product.picture}}">
+		<ul class="item_info">
+			<a ng-click="shop.sendProductInfo(product)" href="#Products/{{product.name}}" >See info</a>
+			<li>{{product.name}}</li>
+			<li>{{product.price | currency:"$"}}</li>
+			<li><button ng-click="shop.sendProductToCart(product)">Add to cart</button></li>
+		</ul>
+		<div class="item_cats">
+			<div ng-repeat="c in product.categoriesRaw track by $index">{{c}}</div>
 		</div>
 	</div>
+	<div class ="inactive" id="loader" ng-class="{active: shop.loading}">
+		<img src="assets/gifs/loader.gif">
+	</div>
+</div>

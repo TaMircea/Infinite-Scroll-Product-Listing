@@ -1,9 +1,7 @@
 angular
 	.module('app')
 	.service('galleryProductService', galleryProductService);
-
 	function galleryProductService($q) {
-
 		var vm = this;
 		vm.sendinfo = $q.defer();
 		vm.infoSent = infoSent;
@@ -14,5 +12,4 @@ angular
 		function sendInfo (product){
 			vm.sendinfo.notify(product);
 		}
-
 	}
