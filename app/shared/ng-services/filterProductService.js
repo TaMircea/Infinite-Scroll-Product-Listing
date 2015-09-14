@@ -39,4 +39,13 @@ angular
 		function sendMaxPrice(max) {
 			vm.maxDefer.notify(max)
 		}
+		vm.nameDefer = $q.defer();
+		vm.nameSent = nameSent;
+		vm.sendName = sendName;
+		function nameSent() {
+			return vm.nameDefer.promise;
+		}
+		function sendName(name) {
+			vm.nameDefer.notify(name)
+		}
 	}

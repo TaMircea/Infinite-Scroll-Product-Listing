@@ -10,7 +10,7 @@ angular
 			scope: {},
 			controller: galleryController,
 			controllerAs: 'shop',
-			bindToController: true	
+			bindToController: true
 		};
 		return directive;
 	};
@@ -31,6 +31,7 @@ angular
         vm.min;vm.max;
         vm.extremePrice = extremePrice;
         vm.LoadProduct();
+        vm.nameSearched;
         filterProductService.categoryChanged().then(null, null, function(value){
             vm.currentCategory = value;
         })
@@ -39,6 +40,9 @@ angular
         })
         filterProductService.maxPriceSent().then(null, null, function(max){
             vm.filterMaxPrice = max;
+        })
+        filterProductService.nameSent().then(null, null, function(name){
+            vm.nameSearched = name;
         })
         function filterRefresh(){
             vm.extremePrice(vm.filteredProducts);
@@ -53,12 +57,12 @@ angular
                     var min = vm.extremePrice(vm.products, 'min');
                     var max = vm.extremePrice(vm.products, 'max');
                     vm.sendFiltersData(products, min, max);
-                    vm.loading = false;   
-                    vm.start += 20;                 
+                    vm.loading = false;
+                    vm.start += 20;
                 });
         }
         function sendProductToCart(product){
-            cartGalleryService.sendProduct(product);   
+            cartGalleryService.sendProduct(product);
         }
         function sendProductInfo(product){
             galleryProductService.sendInfo(product);
