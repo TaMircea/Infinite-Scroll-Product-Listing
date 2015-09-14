@@ -21,24 +21,3 @@
   opacity:1;
 }
 
-
-
-
-.animate-shhi{
-
-    transition: 100ms opacity;
-    position: relative;
-    display: block;
-
-}
-
-.animate-shhi.ng-show {
-  opacity: 1;
-}
-
-.animate-shhi.ng-hide {
-	opacity: 0;
-
-}
-
-
