@@ -6,7 +6,7 @@
 			<a class = "item_link"ng-click="shop.sendProductInfo(product)" href="#Products/{{product.name}}" >info</a>
 			<li class = "item_name">{{product.name}}</li>
 			<li class = "item_price">{{product.price | currency:"$"}}</li>
-			<li class = 'item_buyBtn' ng-click="shop.sendProductToCart(product)">+</li>
+			<li> <button class = 'item_buyBtn' ng-click="shop.sendProductToCart(product)">+</button> </li>
 		</ul>
 		<div class="item_cats">
 			<div ng-repeat="c in product.categoriesRaw track by $index">{{c}}</div>

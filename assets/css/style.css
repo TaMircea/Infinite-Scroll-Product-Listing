@@ -17,21 +17,22 @@ header{
 	background: #099;
 	vertical-align: bottom;
 
-	text-shadow: 0 1px 0 #055, 0 2px 0 #555, 0 3px 0 #066, 0 4px 0 #099, 0 5px 0 #066;
+	text-shadow: 5px 1px 5px #055, 0 2px 0 #555, 0 3px 0 #066, 0 4px 0 #099;
 }
 nav{
 	display: inline-block;
 	margin-right: 10px;
 }
-nav div{
+nav a{
 	display: inline-block;
 	padding: 15px;
 	margin: 5px;
 	border-radius: 5px;
 	cursor: pointer;
 	color:#099;
+	text-decoration: none;
 }
-nav div:hover{
+nav a:hover{
 	background: linear-gradient(to top, #099, #000);
 	color: #FFF;
 	border-bottom: 3px solid #055;
@@ -164,6 +165,26 @@ footer div{
 .productList td {
 	padding: 10px 15px;
 }
+.cart_rmvBtn{
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: linear-gradient(to bottom right, salmon , darkred);
+	text-align: center;
+	vertical-align: bottom;
+	color: white;
+	font-weight: 700;
+	font-size: 80%;
+	cursor: pointer;
+}
+.cart_rmvBtn:active{
+	background: radial-gradient(salmon , darkred)
+}
+.cart_rmvBtn.resizable{
+	width: auto;
+	height: auto;
+	padding: 1%;
+}
 .item{
 	position: relative;
 	display: inline-block;
@@ -205,8 +226,6 @@ footer div{
 	position: absolute;
 	right: 1%;
 	bottom: 0;
-	width: 30px;
-	height: 30px;
 	border-radius: 50%;
 	background: linear-gradient(to bottom right, lightgreen , darkgreen);
 	text-align: center;

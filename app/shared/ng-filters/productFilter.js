@@ -14,8 +14,11 @@ angular
                 if(name!=null || name != undefined){
                     name = name.toUpperCase();
                 }
+                if(name == null || name == undefined){
+                    name = "";
+                }
                 angular.forEach(products, function(product) {
-                  if(product.name.toUpperCase().indexOf(name) != -1 || name == null || name == undefined){
+                  if(product.name.toUpperCase().indexOf(name) != -1){
                 	if(product.price >= price_min && product.price<=price_max){
         	          if(product.categoriesRaw.indexOf(category) != -1){
         	            filteredProducts.push(product);

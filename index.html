@@ -31,23 +31,25 @@
 <body ng-app="app">
 	<header>
 		<div class="logo">
-			El storage
+			El Storeago
 		</div>
 		<nav>
-			<div>Home</div>
-			<div>Shop</div>
-			<div>About</div>
-			<div>Contact</div>
+			<a>Home</a>
+			<a href="#/shop">Shop</a>
+			<a>About</a>
+			<a>Contact</a>
+
 		</nav>
 	</header>
-	<div class="shop" >
-	<div><h1>Our products</h1></div>
-		<my-gallery-directive></my-gallery-directive>
-		<div class="side-content">
-			<my-filter-directive></my-filter-directive>
-			<my-cart-directive></my-cart-directive>
+	  <div class="shop" >
+		  <div><h1>Our products</h1></div>
+		    <my-gallery-directive></my-gallery-directive>
+		    <div class="side-content">
+		      <my-filter-directive></my-filter-directive>
+		      <my-cart-directive></my-cart-directive>
+		  	</div>
 		</div>
-	</div>
+
 	<footer>
 		<div>Copyright @ 2015</div>
 	</footer>
