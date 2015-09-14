@@ -10,18 +10,18 @@ angular
 			scope: {},
 			controller: cartController,
 			controllerAs: 'shop',
-			bindToController: true		
+			bindToController: true
 		};
 		return directive;
 	};
     cartController.$inject = ['storeService', 'cartGalleryService']
     function cartController(storeService, cartGalleryService){
-		var vm = this;   	
+		var vm = this;
         vm.playSound = playSound;
         vm.audio = new Audio('assets/sounds/Ka-Ching.wav');
         vm.addProduct = addProduct;
         vm.removeProduct = removeProduct;
-        vm.cartProducts = [];   
+        vm.cartProducts = [];
         vm.buyCart = buyCart;
         vm.invoiceItems = [];
         vm.cartTotalCalc = cartTotalCalc;
@@ -30,13 +30,14 @@ angular
         vm.cartShown = false;
         vm.showCart = showCart;
         vm.hideCart = hideCart;
-        vm.emptyCart = true;           
+        vm.emptyCart = true;
+        vm.clearCart = clearCart;
         cartGalleryService.productSent().then(null, null, function(product){
             vm.addProduct(product);
         })
         function playSound (){
             vm.audio.play();
-        }          
+        }
         function addProduct(prod){
             vm.totalShown = true;
             vm.emptyCart = false;
@@ -86,6 +87,12 @@ angular
 
         function hideCart(){
             vm.cartShown = false;
+        }
+        function clearCart(){
+            vm.cartTotal = 0;
+            vm.cartProducts = [];
+            vm.emptyCart = true;
+            vm.totalShown = false;
         }
     }
 })();

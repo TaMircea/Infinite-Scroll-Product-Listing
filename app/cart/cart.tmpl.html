@@ -6,12 +6,13 @@
 	<h4>Cart</h4>
 	<table class="productList">
 		<tr ng-repeat="cartProduct in shop.cartProducts">
+			<span class = "cart_clear" ng-show = "shop.totalShown" ng-click="shop.clearCart()">Clear cart</span>
 			<span ng-show="shop.emptyCart" >No item in cart :(</span>
 			<td>{{ cartProduct.name }}</td>
 			<td>{{ cartProduct.qInCart }}</td>
 			<td><button ng-click="shop.removeProduct(cartProduct)">-</button></td>
 		</tr>
-	</table>	
+	</table>
 	<span ng-show="shop.totalShown">Total: {{shop.cartTotal}}</span>
-	<button ng-click="shop.buyCart()">Checkout</button>
+	<button ng-show = "shop.totalShown" ng-click="shop.buyCart()">Checkout</button>
 </div>
