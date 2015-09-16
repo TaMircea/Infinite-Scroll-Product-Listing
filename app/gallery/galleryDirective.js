@@ -62,6 +62,7 @@ angular
                     vm.start += 20;
                 });
         }
+
         function sendProductToCart(product){
             cartGalleryService.sendProduct(product);
         }
