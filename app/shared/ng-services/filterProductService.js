@@ -3,6 +3,7 @@ angular
 	.service('filterProductService', filterProductService);
 	function filterProductService($q){
 		var vm = this;
+
 		vm.notificationDefer = $q.defer();
 		vm.categoryChanged = categoryChanged;
 		vm.changeCategory = changeCategory;
@@ -12,6 +13,7 @@ angular
 		function changeCategory (valueToPass){
 			vm.notificationDefer.notify(valueToPass);
 		}
+
 		vm.dataDefer = $q.defer();
 		vm.filterDataSent = filterDataSent;
 		vm.sendFilterData = sendFilterData;
@@ -21,6 +23,7 @@ angular
 		function sendFilterData(data) {
 			vm.dataDefer.notify(data)
 		}
+
 		vm.minDefer = $q.defer();
 		vm.minPriceSent = minPriceSent;
 		vm.sendMinPrice = sendMinPrice;
@@ -30,6 +33,7 @@ angular
 		function sendMinPrice(min) {
 			vm.minDefer.notify(min)
 		}
+
 		vm.maxDefer = $q.defer();
 		vm.maxPriceSent = maxPriceSent;
 		vm.sendMaxPrice = sendMaxPrice;
@@ -39,6 +43,7 @@ angular
 		function sendMaxPrice(max) {
 			vm.maxDefer.notify(max)
 		}
+
 		vm.nameDefer = $q.defer();
 		vm.nameSent = nameSent;
 		vm.sendName = sendName;
@@ -48,4 +53,5 @@ angular
 		function sendName(name) {
 			vm.nameDefer.notify(name)
 		}
+
 	}

@@ -21,7 +21,7 @@ angular
     	vm.products = [];
         vm.LoadProduct=LoadProduct;
         vm.sendProductToCart = sendProductToCart;
-      	vm.start=0;
+        vm.start=0;
         vm.currentCategory = "All";
         vm.filterMinPrice = 0;
         vm.filterMaxPrice = 100;
@@ -32,11 +32,12 @@ angular
         vm.extremePrice = extremePrice;
         vm.LoadProduct();
         vm.nameSearched;
-        filterProductService.categoryChanged().then(null, null, function(value){
-            vm.currentCategory = value;
-        })
+
         filterProductService.minPriceSent().then(null, null, function(min){
             vm.filterMinPrice = min;
+        })
+        filterProductService.categoryChanged().then(null, null, function(value){
+            vm.currentCategory = value;
         })
         filterProductService.maxPriceSent().then(null, null, function(max){
             vm.filterMaxPrice = max;

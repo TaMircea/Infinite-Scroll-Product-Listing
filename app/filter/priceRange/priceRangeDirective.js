@@ -23,7 +23,8 @@ angular
 		vm.filterMaxRange = vm.maxRange;
     	vm.setMinMaxRange = setMinMaxRange;
     	vm.getDomElement = getDomElement;
-    	function getDomElement(element) {
+
+    function getDomElement(element) {
 			return document.querySelector(element);
 		};
 		var range = vm.getDomElement('.range'),
@@ -31,7 +32,7 @@ angular
 	        right = vm.getDomElement('.range_right'),
 	        rangeLeft = Math.round( range.getBoundingClientRect().left),
 	        rangeWidth = range.getBoundingClientRect().width,
- 	        newVal;  
+ 	        newVal;
 
 	    left.onmousedown = function(){
 	        startMoving('left');
@@ -40,24 +41,24 @@ angular
 	        startMoving('right');
 	    }
 	    function startMoving(direction){
-		      document.onmousemove = function(){
+          document.onmousemove = function(){
 		    	var clickPos = ((event.pageX - rangeLeft)/rangeWidth)*100;
 		        if(direction === 'left' && clickPos <= vm.filterMaxRange){
 		        	left.style.width = clickPos + '%';
-		        	newVal = (clickPos <= vm.minRange) ? vm.minRange : clickPos; 
+		        	newVal = (clickPos <= vm.minRange) ? vm.minRange : clickPos;
 		        	vm.filterMinRange = Math.round(newVal);
 		        	vm.setMinMaxRange('Min');
 		        }
 		      	if(direction === 'right' && clickPos >= vm.filterMinRange){
 		        	right.style.width = (100-clickPos) + '%';
-		        	newVal = (clickPos >= vm.maxRange) ? vm.maxRange : clickPos; 
+		        	newVal = (clickPos >= vm.maxRange) ? vm.maxRange : clickPos;
 		        	vm.filterMaxRange = Math.round(newVal);
 		        	vm.setMinMaxRange('Max');
 		      	}
 		      }
 		      document.onmouseup = function(){
 		      	document.onmousemove = null;
-		      }
+          }
 		  }
 		function setMinMaxRange(MinOrMax){
             if(MinOrMax == 'Min'){

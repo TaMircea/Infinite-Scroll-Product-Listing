@@ -40,7 +40,7 @@ nav a:hover{
 
 }
 footer{
-	margin-top: 10%;
+	margin-top: 2%;
 	background: #000;
 	color:#099;
 	padding: 20px 0;
@@ -52,6 +52,7 @@ footer div{
 
 .gallery{
 	border-bottom: 2px solid #CCC;
+	border-top: 2px solid #CCC;
 	padding-bottom: 10px;
 	position: relative;
 	display: inline-block;
@@ -223,6 +224,8 @@ footer div{
 	display: block;
 }
 .item_buyBtn{
+	border:none;
+	width: 30px;
 	position: absolute;
 	right: 1%;
 	bottom: 0;
@@ -236,7 +239,8 @@ footer div{
 	cursor: pointer;
 }
 .item_buyBtn:active{
-	background: radial-gradient(lightgreen , darkgreen)
+	background: radial-gradient(lightgreen , darkgreen);
+	border: none;
 }
 .item_price{
 	font-size: 80%;
