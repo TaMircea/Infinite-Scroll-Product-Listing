@@ -3,9 +3,9 @@
 <head>
 	<title>Store</title>
 	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css" async>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css" async>
-	<link rel="stylesheet" type="text/css" href="assets/css/animations.css" async>
+	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
@@ -13,28 +13,31 @@
 </head>
 <body ng-app="app">
 	<header>
-		<div class="logo">
-			El Storeago
+		<div class="midpage">
+			<div class="logo">
+				El Storeago
+			</div>
+			<nav>
+				<a href="#/home">Home</a>
+				<a href="#/shop">Shop</a>
+				<a href="#/about">About</a>
+				<a href="#/contact">Contact</a>
+			</nav>
 		</div>
-		<nav>
-			<a>Home</a>
-			<a href="#/shop">Shop</a>
-			<a>About</a>
-			<a>Contact</a>
-
-		</nav>
 	</header>
-	  <div class="shop" >
-		  <div><h1>Our products</h1></div>
+		<div class="page-title"><h2 class="midpage">Our products</h2></div>
+
+	  <div class="shop midpage">
 		    <my-gallery-directive></my-gallery-directive>
 		    <div class="side-content">
 		      <my-filter-directive></my-filter-directive>
 		      <my-cart-directive></my-cart-directive>
 		  	</div>
+
 		</div>
 
 	<footer>
-		<div>Copyright @ 2015</div>
+		<div class="midpage">Copyright @ 2015</div>
 	</footer>
 	<script src="app/app.js"></script>
 	<script src="app/gallery/scrollerDirective.js"></script>
@@ -50,7 +53,6 @@
 	<script src="app/shared/ng-services/filterRangeService.js"></script>
 	<script src="app/shared/ng-services/galleryProductService.js"></script>
 
-	<script src="app/product/productController.js"></script>
 	<script src="app/shared/ng-filters/productFilter.js"></script>
 	<script src="app/route-config.js"></script>
 </body>

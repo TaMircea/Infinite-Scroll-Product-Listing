@@ -6,7 +6,7 @@
 .animate-repeat.ng-enter,
 .animate-repeat.ng-leave {
 
-  transition:opacity linear 0.5s;
+  transition:opacity linear 500ms;
 }
 
 .animate-repeat.ng-leave.ng-leave-active,

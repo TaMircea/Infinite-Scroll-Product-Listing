@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 angular
-	.module('app')
+	.module('myCart',[])
 	.directive('myCartDirective', cartDirective);
 	function cartDirective(){
 		var directive = {

@@ -49,14 +49,26 @@ footer{
 footer div{
 	margin: 10px;
 }
+.midpage{
+	width: 60%;
+	margin: 0 auto;
+}
+.page-title{
+	height: 100%;
+	background: linear-gradient(to top, #CCC, #FFF);
 
+}
+.page-title h2{
+	margin-bottom: 0;
+	padding-bottom: 20px;
+}
 .gallery{
 	border-bottom: 2px solid #CCC;
-	border-top: 2px solid #CCC;
+	margin-top: 1%;
 	padding-bottom: 10px;
 	position: relative;
 	display: inline-block;
-	max-width: 75%;
+	max-width: 90%;
 	height: 750px;
 	overflow-y: scroll;
 	overflow-x: hidden;
@@ -190,9 +202,10 @@ footer div{
 	position: relative;
 	display: inline-block;
 	margin: 5px 10px;
-	border-radius: 5px;
-	border: 1px solid #000;
+	border-radius: 10px;
+	box-shadow: 3px 3px 2px #066;
 	background: linear-gradient(to bottom right, #044, #088, #0BF);
+	overflow: hidden;
 }
 .item_info{
 	list-style: none;
@@ -257,8 +270,13 @@ footer div{
 	transform: rotate(270deg);
 	transform-origin: left top 0;
 }
+
 .displayer a{
 	color: black;
+}
+.displayer_descr{
+	padding: 1%;
+	max-width: 50%;
 }
 .price_min{
 	left: 0;
@@ -278,9 +296,6 @@ footer div{
 	display: inline-block;
 	width: 40%;
 }
-
-
-
 .range{
   height: 20px;
   width: 100%;

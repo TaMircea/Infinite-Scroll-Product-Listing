@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 angular
-	.module('app')
+	.module('myRange',[])
 	.directive('myPriceRangeDirective', myPriceRangeDirective);
 	function myPriceRangeDirective(){
 		var directive = {
