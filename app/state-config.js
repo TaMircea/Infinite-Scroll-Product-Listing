@@ -32,15 +32,17 @@ function config($stateProvider) {
         state('shop.product', {
             url: '/:name?id',
             views: {'project':{
-                templateUrl: 'app/product/product.tmpl.html',
+                templateUrl: 'app/routerTmpl/singleProduct.tmpl.html',
                 controller:  function productController(productFetch, $stateParams, $scope){
                                 var vm = this;
+                                vm.selectedProduct = productFetch.getProduct($stateParams.id)
+                                    console.log(vm.selectedProduct)
                                 $scope.$on('$stateChangeSuccess',function(){
                                     vm.selectedProduct = productFetch.getProduct($stateParams.id)
                                     console.log(vm.selectedProduct)
                                 })
                                 },
-                controllerAs: 'show',}
+                controllerAs: 'shop',}
                 }
         });
 

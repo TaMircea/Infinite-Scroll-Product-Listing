@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 angular
-	.module('myGallery',[])
+	.module('myGallery',['myProduct'])
 	.directive('myGalleryDirective', galleryDirective);
 	function galleryDirective(){
 		var directive = {

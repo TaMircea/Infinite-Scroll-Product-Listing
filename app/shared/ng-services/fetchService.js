@@ -33,11 +33,24 @@ angular
           });
           return vm.products;
         }
+        function fetchProd(id){
+              var request = $http({
+                method: "get",
+                url: "data/getProduct.php",
+                params: {
+                  id: id
+                }
+              })
+              return( request.then(function(response){console.log(response.data);return( response.data) }))
+            }
         function getProduct(id){
-          if(vm.products[0] == null){
-            getProds(0);
-          }
+
           var product;
+          if(vm.products[0] == null){
+            fetchProd(id).then(function(pro){
+              product = pro;
+            });
+            }
           angular.forEach(vm.products, function(prod){
             if(prod.Id == id){
               product = prod;
