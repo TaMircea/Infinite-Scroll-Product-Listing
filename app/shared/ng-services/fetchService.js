@@ -2,9 +2,12 @@ angular
     .module('app')
     .service('productFetch', productFetch);
     function productFetch($http, $q){
+      var vm = this;
+      vm.products= [];
 
       return({
-        getProducts: getProducts
+        getProds: getProds,
+        getProduct: getProduct
         });
 
         function getProducts(start) {
@@ -16,20 +19,33 @@ angular
             }
         });
            return( request.then( handleSuccess, handleError ) );
-        };
-        function handleError( response ) {
-          if (
-              ! angular.isObject( response.data ) ||
-              ! response.data.message
-              ) {
-              return( $q.reject( "An unknown error occurred." ) );
         }
+        function handleError( response ) {
         return( $q.reject( response.data.message ) );
         }
         function handleSuccess( response ) {
             return( response.data );
         }
 
+        function getProds(start){
+          getProducts(start).then(function(products){
+            vm.products.push.apply(vm.products, products);
+          });
+          return vm.products;
+        }
+        function getProduct(id){
+          if(vm.products[0] == null){
+            getProds(0);
+          }
+          var product;
+          angular.forEach(vm.products, function(prod){
+            if(prod.Id == id){
+              product = prod;
+            }
+          });
+
+          return product;
+        }
     }
 
 

@@ -40,6 +40,8 @@ nav a:hover{
 
 }
 footer{
+	position: absolute;
+	bottom: 0;left:0;right: 0;
 	margin-top: 2%;
 	background: #000;
 	color:#099;
@@ -94,6 +96,8 @@ footer div{
 	top: 15%;
 	right: 1%;
 	max-width: 20%;
+
+
 }
 .filter,
 .cart{

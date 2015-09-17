@@ -6,9 +6,11 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+
 
 </head>
 <body ng-app="app">
@@ -18,24 +20,17 @@
 				El Storeago
 			</div>
 			<nav>
-				<a href="#/home">Home</a>
-				<a href="#/shop">Shop</a>
-				<a href="#/about">About</a>
-				<a href="#/contact">Contact</a>
+				<a ui-sref="home">Home</a>
+				<a ui-sref="shop">Shop</a>
+				<a ui-sref="about">About</a>
+				<a ui-sref="contact">Contact</a>
 			</nav>
 		</div>
 	</header>
-		<div class="page-title"><h2 class="midpage">Our products</h2></div>
-
-	  <div class="shop midpage">
-		    <my-gallery-directive></my-gallery-directive>
-		    <div class="side-content">
-		      <my-filter-directive></my-filter-directive>
-		      <my-cart-directive></my-cart-directive>
-		  	</div>
-
+	<div class='ui-view-container'>
+		<div class="well" ui-view="page">
 		</div>
-
+	</div>
 	<footer>
 		<div class="midpage">Copyright @ 2015</div>
 	</footer>
@@ -54,6 +49,6 @@
 	<script src="app/shared/ng-services/galleryProductService.js"></script>
 
 	<script src="app/shared/ng-filters/productFilter.js"></script>
-	<script src="app/route-config.js"></script>
+	<script src="app/state-config.js"></script>
 </body>
 </html>

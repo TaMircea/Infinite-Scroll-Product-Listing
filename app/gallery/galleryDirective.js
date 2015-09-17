@@ -52,15 +52,13 @@ angular
             console.log(vm.min + ' '+ vm.max)
         };
       	function LoadProduct(){
-                vm.loading = true;
-                 productFetch.getProducts(vm.start).then(function(products){
-                    vm.products.push.apply(vm.products, products);
-                    var min = vm.extremePrice(vm.products, 'min');
-                    var max = vm.extremePrice(vm.products, 'max');
-                    vm.sendFiltersData(products, min, max);
-                    vm.loading = false;
-                    vm.start += 20;
-                });
+            vm.loading = true;
+            vm.products = productFetch.getProds(vm.start);
+            var min = vm.extremePrice(vm.products, 'min');
+            var max = vm.extremePrice(vm.products, 'max');
+            vm.sendFiltersData(vm.products, min, max);
+            vm.loading = false;
+            vm.start += 20;
         }
         function sendProductToCart(product){
             cartGalleryService.sendProduct(product);

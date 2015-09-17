@@ -1,6 +1,7 @@
 angular
 	.module('app')
 	.service('filterProductService', filterProductService);
+
 	function filterProductService($q){
 		var vm = this;
 

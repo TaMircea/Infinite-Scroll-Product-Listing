@@ -1,9 +1,11 @@
-<div ng-view></div>
+
 <div class="gallery" when-scrolled="shop.LoadProduct()">
+	<div ui-view = "project">
 	<div class="item animate-repeat" ng-repeat="product in shop.filteredProducts = (shop.products | productFilter: {category: shop.currentCategory, min: shop.filterMinPrice, max: shop.filterMaxPrice, name: shop.nameSearched} )"  >
+	<product></product>
 		<img ng-src="{{product.picture}}">
 		<ul class="item_info">
-			<a class = "item_link"ng-click="shop.sendProductInfo(product)" href="#Products/{{product.name}}&{{product.price}}" >info</a>
+			<a class = "item_link" ng-click="shop.sendProductInfo(product)" ui-sref="shop.product({name:{{product.name}}, id:{{product.Id}} })" >info</a>
 			<li class = "item_name">{{product.name}}</li>
 			<li class = "item_price">{{product.price | currency:"$"}}</li>
 			<li> <button class = 'item_buyBtn' ng-click="shop.sendProductToCart(product)">+</button> </li>
@@ -14,5 +16,6 @@
 	</div>
 	<div class ="inactive" id="loader" ng-class="{active: shop.loading}">
 		<img src="assets/gifs/loader.gif">
+	</div>
 	</div>
 </div>
