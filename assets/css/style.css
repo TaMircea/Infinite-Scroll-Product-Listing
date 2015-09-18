@@ -23,7 +23,7 @@ nav{
 	display: inline-block;
 	margin-right: 10px;
 }
-nav a{
+.nav_tab{
 	display: inline-block;
 	padding: 15px;
 	margin: 5px;
@@ -31,13 +31,22 @@ nav a{
 	cursor: pointer;
 	color:#099;
 	text-decoration: none;
+	width: auto;
+
 }
-nav a:hover{
+.nav_tab:hover{
 	background: linear-gradient(to top, #099, #000);
 	color: #FFF;
 	border-bottom: 3px solid #055;
 	margin-bottom: 2px;
-
+}
+.nav_tab.active{
+	display: inline-block;
+	background: linear-gradient(to top, #099, #000);
+	color: #FFF;
+	border-bottom: 3px solid #055;
+	margin-bottom: 2px;
+	width: auto;
 }
 footer{
 	position: absolute;
@@ -324,5 +333,4 @@ footer div{
 	background: linear-gradient(to right, #033, #07B);
 	float:left;
 }
-
 

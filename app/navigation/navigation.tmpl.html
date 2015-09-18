@@ -1,0 +1,6 @@
+<nav>
+  <a class = "nav_tab" ng-class="{active: nav.selectedTab == 'home', nav_tab: nav.shownNav }" ng-click ="nav.selectedTab = 'home' " ui-sref="home">Home</a>
+  <a ng-class="{active: nav.selectedTab == 'shop', nav_tab: nav.shownNav }" ng-click ="nav.selectedTab = 'shop' " ui-sref="shop">Shop</a>
+  <a ng-class="{active: nav.selectedTab == 'about', nav_tab: nav.shownNav }" ng-click ="nav.selectedTab = 'about' " ui-sref="about">About</a>
+  <a ng-class="{active: nav.selectedTab == 'contact', nav_tab: nav.shownNav }" ng-click ="nav.selectedTab = 'contact' " ui-sref="contact">Contact</a>
+</nav>

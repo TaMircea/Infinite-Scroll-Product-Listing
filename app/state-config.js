@@ -3,7 +3,8 @@ angular
     .module('app')
     .config(config)
 
-function config($stateProvider) {
+function config($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/home');
     $stateProvider.
             state('about',{
             url: '/about',
@@ -33,15 +34,19 @@ function config($stateProvider) {
             url: '/:name?id',
             views: {'project':{
                 templateUrl: 'app/routerTmpl/singleProduct.tmpl.html',
-                controller:  function productController(productFetch, $stateParams, $scope){
-                                var vm = this;
-                                vm.selectedProduct = productFetch.getProduct($stateParams.id)
-                                    console.log(vm.selectedProduct)
-                                $scope.$on('$stateChangeSuccess',function(){
-                                    vm.selectedProduct = productFetch.getProduct($stateParams.id)
-                                    console.log(vm.selectedProduct)
-                                })
-                                },
+                controller:
+                function productController(productFetch, $stateParams){
+                      var vm = this;
+                      vm.selectedProduct;
+                      if(vm.selectedProduct == null){
+                        loadProduct();
+                      }
+                      function loadProduct(){
+                          vm.selectedProduct = productFetch.fetchProd($stateParams.id).then(function(prod){
+                              vm.selectedProduct = prod[0];
+                            });
+                    }
+                },
                 controllerAs: 'shop',}
                 }
         });

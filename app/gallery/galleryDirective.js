@@ -30,8 +30,10 @@ angular
         vm.filterRefresh = filterRefresh;
         vm.min;vm.max;
         vm.extremePrice = extremePrice;
-        vm.LoadProduct();
         vm.nameSearched;
+        if(vm.products[0] == null){
+            vm.LoadProduct();
+        }
 
         filterProductService.minPriceSent().then(null, null, function(min){
             vm.filterMinPrice = min;

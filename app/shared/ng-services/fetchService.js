@@ -4,10 +4,11 @@ angular
     function productFetch($http, $q){
       var vm = this;
       vm.products= [];
+      vm.currentProduct = {};
 
       return({
         getProds: getProds,
-        getProduct: getProduct
+        fetchProd: fetchProd
         });
 
         function getProducts(start) {
@@ -40,25 +41,9 @@ angular
                 params: {
                   id: id
                 }
-              })
-              return( request.then(function(response){console.log(response.data);return( response.data) }))
+              });
+              return( request.then( handleSuccess, handleError ) );
             }
-        function getProduct(id){
-
-          var product;
-          if(vm.products[0] == null){
-            fetchProd(id).then(function(pro){
-              product = pro;
-            });
-            }
-          angular.forEach(vm.products, function(prod){
-            if(prod.Id == id){
-              product = prod;
-            }
-          });
-
-          return product;
-        }
     }
 
 

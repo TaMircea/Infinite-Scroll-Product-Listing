@@ -2,13 +2,15 @@
 $username = "root";
 $password = "root";
 $hostname = "localhost";
-$database = "Shop";
-$conn = new mysqli($hostname, $username, $password, $database);
-  if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+$dbhandle = mysql_connect($hostname, $username, $password)
+ or die("Unable to connect to MySQL");
+$selected = mysql_select_db("Shop",$dbhandle)
+  or die("Could not select shop");
+$id = $_GET["id"];
+$result = mysql_query(" SELECT * FROM Products WHERE Id = $id");
+$jsonData = array();
+  while ($res = mysql_fetch_object($result)) {
+  $jsonData[] = $res;
   }
-  $id = $_GET["id"];
-  $result = mysqli_query($conn,"SELECT * FROM Products");
-  $result->close();
-  $conn->close();
-
+echo json_encode($jsonData, true);
+mysql_close($dbhandle);
