@@ -1,2 +1,2 @@
 angular
-    .module('app', ['ngRoute', 'ngAnimate','MyGallery','MyFilter', 'MyCart']);
+    .module('app', ['ui.router', 'ngAnimate','myGallery','myFilter','myCart','myNavigation']);

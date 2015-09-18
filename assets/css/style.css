@@ -1,40 +1,112 @@
+
 header{
-	background: #CCC;
+	position: relative;
+	background: black;
 	text-align: right;
 }
-nav div{
+.logo{
+	position: absolute;
+	top: 0;
+	left: 1%;
+
+	display: inline-block;
+	padding: 0 10px;
+	font-size: 200%;
+	color: #00BBBB;
+	height: 100%;
+	background: #099;
+	vertical-align: bottom;
+
+	text-shadow: 5px 1px 5px #055, 0 2px 0 #555, 0 3px 0 #066, 0 4px 0 #099;
+}
+nav{
+	display: inline-block;
+	margin-right: 10px;
+}
+.nav_tab{
 	display: inline-block;
 	padding: 15px;
-	margin: 10px;
+	margin: 5px;
 	border-radius: 5px;
-	border: 1px solid #000;
 	cursor: pointer;
+	color:#099;
+	text-decoration: none;
+	width: auto;
+
 }
-nav div:hover{
-	background: #111;
+.nav_tab:hover{
+	background: linear-gradient(to top, #099, #000);
 	color: #FFF;
-	border-color: #FFF;
+	border-bottom: 3px solid #055;
+	margin-bottom: 2px;
+}
+.nav_tab.active{
+	display: inline-block;
+	background: linear-gradient(to top, #099, #000);
+	color: #FFF;
+	border-bottom: 3px solid #055;
+	margin-bottom: 2px;
+	width: auto;
 }
 footer{
-	background: #CCC
+	position: absolute;
+	bottom: 0;left:0;right: 0;
+	margin-top: 2%;
+	background: #000;
+	color:#099;
+	padding: 20px 0;
+	z-index: -100;
 }
 footer div{
 	margin: 10px;
 }
+.midpage{
+	width: 60%;
+	margin: 0 auto;
+}
+.page-title{
+	height: 100%;
+	background: linear-gradient(to top, #CCC, #FFF);
 
+}
+.page-title h2{
+	margin-bottom: 0;
+	padding-bottom: 20px;
+}
 .gallery{
+	border-bottom: 2px solid #CCC;
+	margin-top: 1%;
+	padding-bottom: 10px;
 	position: relative;
 	display: inline-block;
-	max-width: 79%;
+	max-width: 90%;
 	height: 750px;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
+
+::-webkit-scrollbar {
+    height: 12px;
+	width: 5px;
+	background: #ccc;
+    }
+::-webkit-scrollbar-thumb {
+    background: #000;
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+::-webkit-scrollbar-corner {
+    background: #ccc;
+}
+
 .side-content{
 	display: inline-block;
 	position: fixed;
 	top: 15%;
 	right: 1%;
 	max-width: 20%;
+
+
 }
 .filter,
 .cart{
@@ -44,43 +116,66 @@ footer div{
 	display: block;
 	position: relative;
 	border-radius: 5px;
-	border:1px solid black;
+	background: #099;
+	border-bottom:3px solid #044;
+	margin-bottom: 5px;
+}
+.filter input, select{
+	background: #0BB;
+	border-radius: 5px;
+	border:1px solid #088;
 }
 .filter_icon{
+	background: #099;
 	display: block;
 	padding: 0;
 	border-radius: 5px;
 	border:1px solid black;
-	transition: 0s all;
 	transition: background 0.5s;
-
 }
 .filter_icon:hover{
-	background: salmon;
-	
+	background: #0dd;
 	cursor: pointer;
 }
 .cart{
 	position: relative;
 	display: block;
 	border-radius: 5px;
-	border:1px solid black;
+	background: #099;
+	border-bottom:3px solid #044;
+}
+.cart button{
+	margin-bottom: 1%;
+	border-radius: 4px;
+	border: 1px solid #077;
+	background: #077;
+}
+.cart button:hover{
+	background: #0CC;
 }
 .cart_icon{
+	background: #099;
 	display: block;
 	padding: 0;
 	border-radius: 5px;
 	border:1px solid black;
-	transition: 0s all;
 	transition: background 0.5s;
 }
 .cart_icon:hover{
-	background: salmon;
+	background: #0dd;
 	cursor: pointer;
+}
+.cart_clear{
+	position: absolute;
+	bottom:1%;
+	right:1%;
+	cursor: pointer;
+	color: black;
+	background: transparent;
 }
 .closeBtn{
 	border: 1px solid white;
-	padding: 3px 3px 4px 3px;
+	padding: 1px 3px 4px 3px;
 	border-radius: 50%;
 	width: 5px;
 	height: 5px;
@@ -88,7 +183,7 @@ footer div{
 	top: 0;
 	right: 0;
 	color: white;
-	background: black;
+	background: #077;
 	font-size: 40%;
 	text-align: center;
 	cursor: pointer;
@@ -96,16 +191,38 @@ footer div{
 .productList td {
 	padding: 10px 15px;
 }
+.cart_rmvBtn{
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background: linear-gradient(to bottom right, salmon , darkred);
+	text-align: center;
+	vertical-align: bottom;
+	color: white;
+	font-weight: 700;
+	font-size: 80%;
+	cursor: pointer;
+}
+.cart_rmvBtn:active{
+	background: radial-gradient(salmon , darkred)
+}
+.cart_rmvBtn.resizable{
+	width: auto;
+	height: auto;
+	padding: 1%;
+}
 .item{
 	position: relative;
 	display: inline-block;
 	margin: 5px 10px;
-	border-radius: 5px;
-	border: 1px solid #000;
-	background: linear-gradient(to bottom right, darkgrey , lightgrey);
+	border-radius: 10px;
+	box-shadow: 3px 3px 2px #066;
+	background: linear-gradient(to bottom right, #044, #088, #0BF);
+	overflow: hidden;
 }
 .item_info{
 	list-style: none;
+	position: relative;
 }
 .item_cats{
 	display: none;
@@ -116,44 +233,63 @@ footer div{
 	left: 0;
 	background: rgba(255,255,255,0.6);
 	text-align: center;
-	max-height: 70%;
+	max-height: 73%;
+
 }
 .item_cats div{
 	margin: 10px;
 	padding: 10px 15px;
 	background: green;
-
+	cursor: pointer;
 }
+.item_cats div:hover{
+	background: lightgreen;
+}
+
 .item:hover .item_cats{
 	display: block;
 }
-
-.price{
-	display: inline-block;
-	width: 100%;
-}
-.price_base{
-	border: 1px solid black;
-	border-radius: 8px;
-	padding: 5px;
-	position: relative;
-	height: 10px;
-	background: #DDD;
-}
-.price_base > div{
-	border: 5px solid black; 
-	border-radius: 100%;
-	width: 5px;
-	height: 5px;
+.item_buyBtn{
+	border:none;
+	width: 30px;
 	position: absolute;
-	top:15%;
-	background: #FFF;
+	right: 1%;
+	bottom: 0;
+	border-radius: 50%;
+	background: linear-gradient(to bottom right, lightgreen , darkgreen);
+	text-align: center;
+	vertical-align: bottom;
+	color: white;
+	font-weight: 700;
+	font-size: 150%;
+	cursor: pointer;
 }
-.price_base > div:hover{
-	border: 5px solid darkgrey;
+.item_buyBtn:active{
+	background: radial-gradient(lightgreen , darkgreen);
+	border: none;
 }
-.price_base > div:focus{
-	border: 5px solid orange;
+.item_price{
+	font-size: 80%;
+}
+.item_name{
+	font-size: 120%;
+	font-weight: 500;
+	text-align: left;
+}
+.item_link{
+	position: absolute;
+	left: 5%;
+	top:80%;
+	transform: rotate(270deg);
+	transform-origin: left top 0;
+}
+
+.displayer a{
+	color: black;
+}
+.displayer_descr{
+	padding: 1%;
+	max-width: 50%;
 }
 .price_min{
 	left: 0;
@@ -173,30 +309,28 @@ footer div{
 	display: inline-block;
 	width: 40%;
 }
-
-
-
 .range{
   height: 20px;
   width: 100%;
   position: relative;
-  background: gray;
+  background: #0AF;
   margin: 10px 0;
+  overflow: hidden;
+  border-radius: 10px;
 
 }
 .range_left,
 .range_right{
-  background: red;
   width: 10px;
   height: 100%;
   cursor: pointer;
 }
 .range_right{
+  background: linear-gradient(to left, #033, #07B);
   float: right;
-  background: blue; 
 }
 .range_left{
+	background: linear-gradient(to right, #033, #07B);
 	float:left;
 }
-
 

@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 <head>
 	<title>Store</title>
 	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animations.css">
- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
- 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
- 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
-
- 	<script src="app/app.js"></script>
- 	<script src="app/gallery/scrollerDirective.js"></script>
- 	<script src="app/gallery/galleryDirective.js"></script>	
- 	<script src="app/filter/filterDirective.js"></script>
- 	<script src="app/cart/cartDirective.js"></script>
- 	<script src="app/filter/priceRange/priceRangeDirective.js"></script>
- 
- 	<script src="app/shared/ng-services/fetchService.js"></script>
- 	<script src="app/shared/ng-services/storeService.js"></script>
- 	<script src="app/shared/ng-services/filterProductService.js"></script>
- 	<script src="app/shared/ng-services/cartGalleryService.js"></script>
- 	<script src="app/shared/ng-services/filterRangeService.js"></script>
- 	<script src="app/shared/ng-services/galleryProductService.js"></script> 	
-
- 	<script src="app/product/productController.js"></script>
- 	<script src="app/shared/ng-filters/productFilter.js"></script>
-	<script src="app/route-config.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/newStyle.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
 </head>
-<body>
+
+<body ng-app="app">
 	<header>
-		<nav>
-			<div>Home</div>
-			<div>Shop</div>
-			<div>About</div>
-			<div>Contact</div>
-		</nav>
-	</header>
-	<div class="shop" >
-		<my-gallery-directive></my-gallery-directive>
-		<div class="side-content">
-			<my-filter-directive></my-filter-directive>
-			<my-cart-directive></my-cart-directive>
+		<div class="midpage">
+			<div class="logo">El Storeago</div>
+			<my-navigation-directive></my-navigation-directive>
 		</div>
-	</div>	
+	</header>
+
+	<div class='ui-view-container'>
+		<div ui-view="page"></div>
+	</div>
+
 	<footer>
-		<div>Copyright @ 2015</div>
+		<div class="midpage">Copyright @ 2015</div>
 	</footer>
+
+
+	<script src="app/app.js"></script>
+	<script src="app/gallery/scrollerDirective.js"></script>
+	<script src="app/gallery/galleryDirective.js"></script>
+	<script src="app/filter/filterDirective.js"></script>
+	<script src="app/cart/cartDirective.js"></script>
+	<script src="app/product/productDirective.js"></script>
+	<script src="app/filter/priceRange/priceRangeDirective.js"></script>
+	<script src="app/navigation/navigationDirective.js"></script>
+	<script src="app/shared/ng-services/storeService.js"></script>
+	<script src="app/shared/ng-services/filterProductService.js"></script>
+	<script src="app/shared/ng-services/fetchService.js"></script>
+	<script src="app/shared/ng-services/cartGalleryService.js"></script>
+	<script src="app/shared/ng-services/filterRangeService.js"></script>
+	<script src="app/shared/ng-services/galleryProductService.js"></script>
+	<script src="app/shared/ng-filters/productFilter.js"></script>
+	<script src="app/state-config.js"></script>
+
 </body>
+
 </html>

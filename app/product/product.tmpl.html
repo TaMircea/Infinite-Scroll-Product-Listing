@@ -1,5 +1,11 @@
-<div class = "displayer" ng-controller="productController as show">
-	<div>{{show.selectedProduct.name}}</div>
-	<div>{{show.selectedProduct.price}}</div>
-	<img ng-src="{{show.selectedProduct.picture}}">
-</div>
+
+	<img ng-src="{{product.picture}}">
+  <ul class="item_info">
+    <a class = "item_link" ng-click="shop.sendProductInfo(product)" ui-sref="shop.product({ id: {{product.Id}} })" >info</a>
+    <li class = "item_name">{{product.name}}</li>
+    <li class = "item_price">{{product.price | currency:"$"}}</li>
+    <li> <button class = 'item_buyBtn' ng-click="shop.sendProductToCart(product)">+</button> </li>
+  </ul>
+  <div class="item_cats">
+    <div ng-repeat="c in product.categoriesRaw track by $index">{{c}}</div>
+  </div>

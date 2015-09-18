@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 angular
-	.module('MyFilter',['MyRange'])
+	.module('myFilter',['myRange'])
 	.directive('myFilterDirective', filterDirective);
 	function filterDirective(){
 		var directive = {
@@ -31,6 +31,8 @@ angular
         vm.categories.push("All");
         vm.change = change;
         vm.currentCategory = "All";
+        vm.searchName = searchName;
+        vm.nameSearched;
         vm.sendMinMaxRange = sendMinMaxRange
         filterProductService.filterDataSent().then(null, null, function(data){
             vm.products = data.products;
@@ -39,6 +41,7 @@ angular
             vm.sendMinMaxRange();
             vm.catFilter();
         });
+
         filterRangeService.minRangeSent().then(null, null, function(min){
             vm.minRange = min;
             vm.setMinMaxPrice('Min');
@@ -48,7 +51,7 @@ angular
             vm.setMinMaxPrice('Max');
         });
         vm.category = vm.categories[0];
-        function change (option){ 
+        function change (option){
                 vm.currentCategory=option;
                 console.log(vm.currentCategory);
                 filterProductService.changeCategory(option);
@@ -84,6 +87,9 @@ angular
                 max: vm.maxRange
             }
             filterRangeService.sendMinMaxRange(data);
+        }
+        function searchName(){
+            filterProductService.sendName(vm.nameSearched);
         }
 	}
 })();
